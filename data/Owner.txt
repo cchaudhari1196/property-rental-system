@@ -1,0 +1,52 @@
+			Owner:-
+*)owner id 	int(10)/ unique/ primary key/auto increment/
+1)Owner name	  varchar/ not null/255/
+2)Contact number  only 10 digit / not null/integer/
+3)email Id	  varchar inclue @ .
+*4)password   	  varchar any
+
+4)Address
+	*)flat no	int(3) not null
+	1)Buiding name  varchar/String
+	2)Colony name	varchar
+	3)city		varchar/
+	4)pincode	int/ only 6 number/ not for search 
+	*)landmark	varchar
+
+5)flat details
+	
+	*)propety type bunglow/appartment/row house/villa/studio/farm house dropdown/varchar   --------Will come in category=
+	1)type 1RK/1BHK/2BHK/3bhk   dropdown/ varchar-------------------------Will come under category =
+	2)rent in RS	 	    int(10)/		
+	3)Preferred Tenants familt/bachlor varchar/dropdown/------------------New Table=
+	4)deposit		int(10)
+	5)builtup area 300sqft 	  int(5)
+	6)furnished Type 	furnished/semifurnished/unfurnished  varchar/dropdown---------New Table=
+	7)Parking car/bike		varchar/dropdown--------------------New Table	=	
+	8)Balcony			int(2)
+		9)Overview
+			1)Water Supply Corporation	
+			2)Bathroom 1/2			int(2)
+			3)Gated Security yes/No		varchar(3)/dropdown
+			4)Facing West			varchar N/S/W/E
+			5)Non-Veg Allowed Yes/no	Boolean/varchar/dropdown
+		10)Description:-
+			owner add description about flat
+			not compulsary.                     varchar(255)/text Data
+		11)Near by
+			1)Police Station		 in KM/float(10)   
+			2)bus stop
+			3) railway station
+			4)airport
+			5)hospital
+			6)restaurent 
+		12) Flat photo				Binary Large Object ( BLOB )/jpg/jpeg
+	
+	
+6)Availability  sale/not sale
+7)Posted On May 25, 2022
+
+
+
+
+	

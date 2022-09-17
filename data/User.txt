@@ -1,0 +1,8 @@
+1)user name		varchar(25)
+2)Mobile number		int(10)/not null/limit or constraints only 10
+3) email Id		varchar inclue @ .
+4) passward		varchar
+
+
+
+

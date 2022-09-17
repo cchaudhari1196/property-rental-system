@@ -1,7 +1,7 @@
 import React from "react";
 import '../Home.css';
 import Photo2 from '../Photo2.jpg';
-import Product from './Product.js';
+import Product from './Property.js';
 import { Container, Row } from 'react-bootstrap';
 import Loader from './Loader';
 import Footer from './Footer.js';

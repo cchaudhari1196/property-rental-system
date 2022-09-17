@@ -17,7 +17,7 @@ function AdminHeader() {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Link to="/viewproducts" className="navbar_brand">
+        <Link to="/viewproperties" className="navbar_brand">
           <Navbar.Brand> &nbsp;</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -28,34 +28,14 @@ function AdminHeader() {
             navbarScroll
           >
             <NavLink
-              to={'/addcategory'}
+              to={'/viewproperties'}
               className={
-                window.location.pathname === '/addcategory'
+                window.location.pathname === '/viewproperties'
                   ? 'headerLink headerLinkActive'
                   : 'headerLink'
               }
             >
-              Categories
-            </NavLink>
-            <NavLink
-              to={'/addlanguage'}
-              className={
-                window.location.pathname === '/addlanguage'
-                  ? 'headerLink headerLinkActive'
-                  : 'headerLink'
-              }
-            >
-              Languages
-            </NavLink>{' '}
-            <NavLink
-              to={'/viewproducts'}
-              className={
-                window.location.pathname === '/viewproducts'
-                  ? 'headerLink headerLinkActive'
-                  : 'headerLink'
-              }
-            >
-              Products
+              Properties
             </NavLink>
             <NavLink
               to={'/viewcustomer'}
@@ -68,39 +48,21 @@ function AdminHeader() {
               Customers
             </NavLink>
             <NavLink
-              to={'/viewvendors'}
+              to={'/viewowners'}
               className={
-                window.location.pathname === '/viewvendors'
+                window.location.pathname === '/viewowners'
                   ? 'headerLink headerLinkActive'
                   : 'headerLink'
               }
             >
-              Vendors
-            </NavLink>
-            <NavLink
-              to={'/vieworders'}
-              className={
-                window.location.pathname === '/vieworders'
-                  ? 'headerLink headerLinkActive'
-                  : 'headerLink'
-              }
-            >
-              Orders
+              Owners
             </NavLink>
           </Nav>
-          <Nav.Link>
-            <Link to={'/awallet'} className="headerLink">
-              <AccountBalanceWalletIcon
-                fontSize="large"
-                style={{ color: '#6e1230' }}
-              />
-            </Link>
-          </Nav.Link>
           <Nav.Link>
             <Link to={!sign && '/adminlogin'} className="headerLink">
               <div className="aheader_option">
                 <span className="aheader_optionLineOne">
-                  Hello {!sign ? 'Admin' : sign.a_id}
+                  Hello {!sign ? 'Admin' : sign.id}
                 </span>
                 <span className="aheader_optionLineTwo" onClick={signOut}>
                   {sign ? 'Sign Out' : 'Sign In'}

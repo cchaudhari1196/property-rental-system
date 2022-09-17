@@ -13,7 +13,7 @@ export default function Subtotal() {
         let sign = JSON.parse(localStorage.getItem('data1'));
         console.log(sign);
         if(sign ===null){
-            history('/login')
+            history('/')
         }
         else{
             history('/payment')

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import '../Product.css'
+import '../Property.css'
 import { useStateValue } from './Stateprovider'
 import { Row, Card, Col, Modal, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { Rating } from 'react-simple-star-rating'
 
-function Product({
+function Property({
   id,
   title,
   describe,
@@ -91,7 +91,7 @@ function Product({
               <div style={{ color: 'grey' }} className="mt-1">
                 By:
                 {authors.map((a) => (
-                  <span key={a?.id}> {a?.a_name}(Author) | </span>
+                  <span key={a?.id}> {a?.name}(Author) | </span>
                 ))}
                 Publisher : <span>{publisher?.p_name}</span>
               </div>
@@ -145,7 +145,7 @@ function Product({
           </Card.Text>
           <Card.Text style={{ marginBottom: '0px' }}>
             {authors.map((a) => (
-              <div>{a.a_name}</div>
+              <div>{a.name}</div>
             ))}
           </Card.Text>
           <Card.Text>
@@ -183,4 +183,4 @@ function Product({
   )
 }
 
-export default Product
+export default Property

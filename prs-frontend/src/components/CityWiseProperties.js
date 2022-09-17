@@ -3,18 +3,18 @@ import '../Home.css';
 import { Container, Row } from 'react-bootstrap';
 import Loader from './Loader';
 import Footer from './Footer.js';
-import Product from './Product.js';
+import Product from './Property.js';
 import Photo2 from '../Photo2.jpg';
 import { useParams } from 'react-router-dom'
 
-function CategoriesWiseProduct(props) {
+function CityWiseProperties(props) {
     const [loading, setLoading] = useState(false)
     const [searcherror, setSearcherror] = useState('')
     const [sr, setSr] = useState([])
     const { category } = useParams()
     useEffect(() => {
         setLoading(true)
-        fetch(process.env.REACT_APP_BASE_URL + "/product?categoryId=" + category)
+        fetch(process.env.REACT_APP_BASE_URL + "/property?city=" + category)
             .then(resp => resp.json())
             .then(data => {
                 console.log(data)
@@ -69,4 +69,4 @@ function CategoriesWiseProduct(props) {
             </div>
     )
 }
-export default CategoriesWiseProduct;
+export default CityWiseProperties;

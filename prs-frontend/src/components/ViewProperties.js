@@ -2,7 +2,7 @@ import React from 'react'
 import '../compheader.css'
 import { Button, Modal, Row, Table } from 'react-bootstrap'
 
-export default class ViewProducts extends React.Component {
+export default class ViewProperties extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,7 +12,7 @@ export default class ViewProducts extends React.Component {
     }
   }
   componentDidMount = () => {
-    fetch(process.env.REACT_APP_BASE_URL + '/product/getallproducts')
+    fetch(process.env.REACT_APP_BASE_URL + '/property/all')
       .then((resp) => resp.json())
       .then((data) => this.setState({ to: data }))
   }
@@ -48,7 +48,7 @@ export default class ViewProducts extends React.Component {
                     <tr style={{ backgroundColor: '#6e1230', color: 'white' }}>
                       <th>Product ID</th>
                       <th>Image</th>
-                      <th>Vendor Name</th>
+                      <th>Owner Name</th>
                       <th>Product Title</th>
                       <th>Product Describe</th>
                       <th>Product Price</th>
@@ -67,7 +67,7 @@ export default class ViewProducts extends React.Component {
                           <td>
                             <img src={o.imageUrl} style={{ height: '110px' }} />
                           </td>
-                          <td>{o.vdr?.v_name}</td>
+                          <td>{o.vdr?.name}</td>
                           <td>{o.pname}</td>
                           <td>{o.pdesc.substring(0,100)}... <a style={{color:"blue", cursor:"pointer"}} onClick={(e)=>this.handleShowMoreLink(o.pdesc)}>Show More</a></td>
                           <td>{o.pprice}</td>
@@ -80,7 +80,7 @@ export default class ViewProducts extends React.Component {
                           </td>
                           <td>
                             {o.authors.map((a) => {
-                              return <div key={a.a_id}>{a.a_name}</div>
+                              return <div key={a.id}>{a.name}</div>
                             })}
                           </td>
                           <td>{o?.publisher?.p_name}</td>

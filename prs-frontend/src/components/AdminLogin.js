@@ -89,8 +89,8 @@ class AdminLogin extends React.Component {
 
         const url = process.env.REACT_APP_BASE_URL + "/admin/adminlogin"
         let data = {
-            "a_email": adminid,
-            "a_password": apassword
+            "email": adminid,
+            "password": apassword
         }
         await fetch(url, {
             method: 'POST', // or 'PUT'
@@ -103,7 +103,7 @@ class AdminLogin extends React.Component {
             .then(data => {
                 if (data != null) {
                     localStorage.setItem('data1', JSON.stringify(data));
-                    window.location.href = '/viewproducts';
+                    window.location.href = '/viewproperties';
                 }
                 else {
                     alert("Wrong ID/Password");
@@ -143,7 +143,7 @@ class AdminLogin extends React.Component {
                         }
                         <button disabled={!this.state.isFormValid} className={this.state.isFormValid ? 'innerbutton' : "inactivebtn"} onClick={this.signIn}>Sign In</button><br />
                         <Form.Group className="mb-2" controlId="formBasicEmail">
-                            <Link to="/login" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
+                            <Link to="/" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
                         </Form.Group>
                     </form>
                 </div>

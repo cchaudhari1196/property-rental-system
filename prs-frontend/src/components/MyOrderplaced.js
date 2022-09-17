@@ -18,8 +18,8 @@ function MyOrderplaced() {
                     <h2>Congratulation!! Your Order has begin Placed</h2><br />
                 </div>
                 <form >
-                    <h5>Order bill is mailed at: {sign.u_email}</h5><br />
-                    <h5>Order will be delivered at: {sign.u_address}</h5><br />
+                    <h5>Order bill is mailed at: {sign.email}</h5><br />
+                    <h5>Order will be delivered at: {sign.address}</h5><br />
                     <div>
                         {location.state.orderData.productAssoc.map((p,index)=>(
                             <div key={index}>{p.product.pname} x {p.quantity}</div>

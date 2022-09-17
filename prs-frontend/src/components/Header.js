@@ -29,7 +29,7 @@ function Header() {
   let signOut = () => {
     if (sign != null) {
       localStorage.removeItem('data1')
-      window.location.href = '/login'
+      window.location.href = '/'
     }
   }
   const makeSearchReq = (e) => {
@@ -106,10 +106,10 @@ function Header() {
             <button className="searchBtn">Search</button>
           </Form>
           <Nav.Link>
-            <Link to={!sign && '/login'} className="headerLink">
+            <Link to={!sign && '/'} className="headerLink">
               <div className="header_option">
                 <span className="header_optionLineOne">
-                  Hello {!sign ? 'User' : sign.u_fname}
+                  Hello {!sign ? 'User' : sign.fname}
                 </span>
                 <span className="header_optionLineTwo" onClick={signOut}>
                   {sign ? 'Sign Out' : 'Sign In'}
@@ -128,15 +128,6 @@ function Header() {
           <Nav.Link>
             <Link to="/profile">
               <PersonIcon
-                fontSize="large"
-                style={{ color: '#6e1230' }}
-              />
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/wallet">
-              {/* <p className='header_category'>Wallet</p> */}
-              <AccountBalanceWalletIcon
                 fontSize="large"
                 style={{ color: '#6e1230' }}
               />

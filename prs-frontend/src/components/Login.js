@@ -96,8 +96,8 @@ function LoginIn() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                u_email: email,
-                u_password: password,
+                email: email,
+                password: password,
             })
         };
         const url = process.env.REACT_APP_BASE_URL + "/user/loginuser";
@@ -107,11 +107,11 @@ function LoginIn() {
             .then(data => {
                 if (data) {
                     localStorage.setItem('data1', JSON.stringify(data));
-                    history('/')
+                    history('/home')
                 }
                 else {
                     alert("Wrong ID/Password");
-                    history('/login')
+                    history('/')
                 }
             }).catch((error) => {
                 setIsError(true)
@@ -160,7 +160,7 @@ function LoginIn() {
                 {/* <Link to="/forgetpass"><p style={{ textAlign: 'center' }}>Forget Password</p></Link> */}
 
                 <Link to="/register" ><button className='innerbutton'> Create Account</button></Link>
-                <Link to="/vendorlogin" ><button className='innerbutton mt-3'> Vendor Login</button></Link>
+                <Link to="/ownerlogin" ><button className='innerbutton mt-3'> Owner Login</button></Link>
                 <Link to="/adminlogin" ><button className='innerbutton mt-3'> Admin Login</button></Link>
             </div>
         </div>

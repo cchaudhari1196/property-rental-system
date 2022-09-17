@@ -7,34 +7,25 @@ import Footer from './components/Footer.js';
 import Search from './components/Search.js';
 import RawProducts from './components/RawProducts.js';
 import StitchedProducts from './components/StitchedProducts.js';
-import Vendorlogin from './components/Vendorlogin.js';
-import VendorHome from './components/VendorHome.js';
+import Ownerlogin from './components/Ownerlogin.js';
+import OwnerHome from './components/OwnerHome.js';
 import Adminlogin from './components/AdminLogin.js';
-import VendorHeader from './components/VendorHeader.js';
+import OwnerHeader from './components/OwnerHeader.js';
 import AdminHeader from './components/AdminHeader.js';
-import VendorRegister from './components/VendorRegister.js';
-import AddProduct from './components/AddProduct.js';
+import OwnerRegister from './components/OwnerRegister.js';
+import AddProperty from './components/AddProperty.js';
 import Register from './components/Register.js';
-import ViewProducts from './components/ViewProducts.js';
+import ViewProperties from './components/ViewProperties.js';
 import ViewCustomer from './components/ViewCustomer.js';
-import ViewVendor from './components/ViewVendor.js';
+import ViewOwner from './components/ViewOwner.js';
 import ViewOrders from './components/ViewOrders.js';
 import ViewOrderbyuid from './components/ViewOrderbyuid.js';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Payment from './components/Payment.js';
 import ViewOutofStock from './components/ViewOutofStock.js';
-import AddCategory from './components/AddCategory.js';
-import ForgetPassword from './components/ForgetPassword.js';
-import ResetPassword from './components/ResetPassword.js';
 import MyOrderplaced from './components/MyOrderplaced.js';
-import AddMoney from './components/AddMoney.js';
-import Wallet from './components/Wallet.js';
-import Awallet from './components/Awallet.js';
-import Vwallet from './components/Vwallet.js';
 import AboutUs from './components/AboutUs.js';
 import { ToastContainer } from 'react-toastify';
-import CategoriesWiseProduct from './components/categoriesWiseProduct';
-import AddLangauage from './components/AddLanguage';
+import CityWiseProperties from './components/CityWiseProperties';
 import MyProfile from './components/MyProfile';
 
 function App() {
@@ -43,46 +34,35 @@ function App() {
       <div className="App">
       <ToastContainer />
         <Routes>
-          <Route path="/" element={<><Header /><Home /></>} />
+          <Route path="/home" element={<><Header /><Home /></>} />
           <Route path="/checkout" element={<><Header /><Checkout /><Footer /></>} />
-          <Route path="/login" element={<><Login /></>} />
+          <Route path="/" element={<><Login /></>} />
           <Route path="/register" element={<> <Register /></>} />
-          <Route path="/vendorregister" element={<> <VendorRegister /></>} />
-          <Route path="/payment" element={<> <Payment /> <Footer /></>} />
-          <Route path="/vendorlogin" element={<><Vendorlogin /></>} />
+          <Route path="/owneregister" element={<> <OwnerRegister /></>} />
+          <Route path="/ownerlogin" element={<><Ownerlogin /></>} />
           <Route path="/adminlogin" element={<><Adminlogin /></>} />
           <Route path="/search" element={<><Header /><Search /></>} />
-          <Route path="/vendor" element={<><VendorHeader /> <VendorHome /></>} />
-          <Route path="/addcategory" element={<><AdminHeader />
-            <AddCategory /></>} />
-            <Route path="/addlanguage" element={<><AdminHeader />
-            <AddLangauage /></>} />
-          <Route path="/viewproducts" element={<><AdminHeader />
-            <ViewProducts /></>} />
+          <Route path="/owner" element={<><OwnerHeader /> <OwnerHome /></>} />
+          <Route path="/viewproperties" element={<><AdminHeader />
+            <ViewProperties /></>} />
           <Route path="/viewcustomer" element={<><AdminHeader />
             <ViewCustomer /></>} />
-          <Route path="/viewvendors" element={<><AdminHeader />
-            <ViewVendor /></>} />
+          <Route path="/viewowners" element={<><AdminHeader />
+            <ViewOwner /></>} />
           <Route path="/vieworders" element={<><AdminHeader />
             <ViewOrders /></>} />
-          <Route path="/addproduct" element={<><VendorHeader />
-            <AddProduct /></>} />
-          <Route path="/viewproductoutofstock" element={<><VendorHeader />
+          <Route path="/addproperty" element={<><OwnerHeader />
+            <AddProperty /></>} />
+          <Route path="/viewproductoutofstock" element={<><OwnerHeader />
             <ViewOutofStock /></>} />
-          <Route path="/forgetpass" element={<><ForgetPassword /></>} />
-          <Route path="/reset" element={<><ResetPassword /></>} />
           <Route path="/order" element={<><Header />
             <ViewOrderbyuid />
             <Footer /></>} />
           <Route path="/placed" element={<><MyOrderplaced /></>} />
-          <Route path="/addmoney" element={<><Header /><AddMoney /></>} />
-          <Route path="/wallet" element={<><Header /><Wallet /></>} />
-          <Route path="/awallet" element={<><AdminHeader /><Awallet /></>} />
-          <Route path="/vwallet" element={<><VendorHeader /><Vwallet /></>} />
           <Route path="/raw" element={<><Header />
             <RawProducts /></>} />
-          <Route path="/products/:category" element={<><Header />
-            <CategoriesWiseProduct /></>} />
+          <Route path="/property/:city" element={<><Header />
+            <CityWiseProperties /></>} />
           <Route path="/stitched" element={<><Header />
             <StitchedProducts /></>} />
           <Route path="/about-us" element={<><Header />

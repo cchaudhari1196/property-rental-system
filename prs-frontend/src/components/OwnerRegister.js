@@ -6,7 +6,7 @@ import { Form } from "react-bootstrap";
 import Logo from '../assets/img/Logo.png';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-export default class VendorRegister extends React.Component{
+export default class OwnerRegister extends React.Component{
     constructor(props){
         super(props);
         this.state ={
@@ -162,18 +162,18 @@ export default class VendorRegister extends React.Component{
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            v_name: this.state.fname,
-            v_phone: this.state.contactno,
-            v_address: this.state.address,
-            v_email: this.state.email,
-            v_password : this.state.password,
+            name: this.state.fname,
+            phone: this.state.contactno,
+            address: this.state.address,
+            email: this.state.email,
+            password : this.state.password,
         })
     };
 
-    await fetch(process.env.REACT_APP_BASE_URL+"/vendor/addvendor",reqData)
+    await fetch(process.env.REACT_APP_BASE_URL+"/owner",reqData)
     .then(resp => resp.json())
     .then(data => this.setState({st: data, success: true}));
-    window.location.href="/vendorlogin";
+    window.location.href="/ownerlogin";
        
     }
     render(){
@@ -185,7 +185,7 @@ export default class VendorRegister extends React.Component{
             <img className='login_img' src={Logo} alt='logo' />
             </Link>
             <div className='register_container'>
-                <h1>Vendor Sign-up</h1>
+                <h1>Owner Sign-up</h1>
                 {/* <form >
                     <h5>First Name</h5><input type='text' name="fname" value={this.state.fname} onChange={this.handleChange}/><br/>
                     <h5>Email</h5><input type='text' name="email" value={this.state.email} onChange={this.handleChange}/><br/>
@@ -193,7 +193,7 @@ export default class VendorRegister extends React.Component{
                     <h5>Contact Number</h5><input type='number'name="contactno" value={this.state.contactno} onChange={this.handleChange}/><br/>
                     <h5>Password</h5><input type='password' name="password" value={this.state.password} onChange={this.handleChange}/><br/>
                     <h5>Retype-Password</h5><input type='password' name="repassword" value={this.state.repassword} onChange={this.handleChange}/><br/>
-                    <Link to="/vendorlogin" > <button className='innerbutton' type="submit" value="Submit" onClick={this.submitForm}>Sign Up</button></Link><br/>
+                    <Link to="/ownerlogin" > <button className='innerbutton' type="submit" value="Submit" onClick={this.submitForm}>Sign Up</button></Link><br/>
                 </form> */}
                 <Form.Group className="mb-2" controlId="formBasicEmail">
                         <Form.Label>First Name</Form.Label>
@@ -223,7 +223,7 @@ export default class VendorRegister extends React.Component{
                         <Link to="/register" ><button className='innerbutton' type="submit" onClick={this.submitForm}>Sign Up</button></Link><br />
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formBasicEmail">
-                        <Link to="/vendorlogin" ><button className='innerbutton'><ArrowBackIcon/>Back</button></Link><br />
+                        <Link to="/ownerlogin" ><button className='innerbutton'><ArrowBackIcon/>Back</button></Link><br />
                     </Form.Group>
                 <span>{this.state.error.emailerr}{this.state.error.fnameerr}{this.state.error.lnameerr}{this.state.error.addresserr}<br/>
                 {this.state.error.pwderr}{this.state.error.contactnoerr}</span>

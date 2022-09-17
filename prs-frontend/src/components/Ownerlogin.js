@@ -1,12 +1,12 @@
 import React from 'react';
-import '../vendorLogin.css';
+import '../ownerLogin.css';
 import HomeIcon from '@material-ui/icons/Home';
 import { Link } from 'react-router-dom';
 import { Form } from "react-bootstrap";
 import Logo from '../assets/img/Logo.png';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-class VendorLogin extends React.Component {
+class OwnerLogin extends React.Component {
 
     constructor(props) {
         super(props)
@@ -87,11 +87,10 @@ class VendorLogin extends React.Component {
         let vemail = this.state.vemail;
         let vpassword = this.state.vpassword;
 
-        // const url = process.env.REACT_APP_BASE_URL + "/loginvendor?v_email=" + vemail + "&v_password=" + vpassword;
-        const url = process.env.REACT_APP_BASE_URL + "/vendor/loginvendor";
+        const url = process.env.REACT_APP_BASE_URL + "/owner/login";
         let data = {
-            "v_email": vemail,
-            "v_password": vpassword
+            "email": vemail,
+            "password": vpassword
         }
         // etch('https://example.com/profile', {
         //     method: 'POST', // or 'PUT'
@@ -123,8 +122,8 @@ class VendorLogin extends React.Component {
                 if (data) {
                     localStorage.setItem('data1', JSON.stringify(data));
                     let sign = JSON.parse(localStorage.getItem('data1'));
-                    if (sign.v_status) {
-                        window.location.href = '/vendor';
+                    if (sign.status) {
+                        window.location.href = '/owner';
                     }
                     else {
                         alert("You are not Approved By the Admin");
@@ -136,7 +135,7 @@ class VendorLogin extends React.Component {
                 }
                 else {
                     alert("Wrong ID/Password");
-                    window.location.href = '/vendorlogin';
+                    window.location.href = '/ownerlogin';
                 }
             })
             .catch((error) => {
@@ -155,7 +154,7 @@ class VendorLogin extends React.Component {
                     <img className='login_img' src={Logo} alt='logo' />
                 </Link>
                 <div className='login_container'>
-                    <h1>Vendor Sign-in</h1>
+                    <h1>Owner Sign-in</h1>
                     {/* <form>
                         <h5>Email</h5><input type='text' name="vemail" value={this.state.vemail} onChange={this.handleChange} />
                         <h5>Password</h5><input type='password' name="vpassword" value={this.state.vpassword} onChange={this.handleChange} /><br />
@@ -177,9 +176,9 @@ class VendorLogin extends React.Component {
                             Incorrect Email and Password
                         </Form.Text>
                     }
-                    <Link to="/vendorregister" ><button className='innerbutton'> Create your Vendor's Bookly Account</button></Link>
+                    <Link to="/owneregister" ><button className='innerbutton'> Create your Owner's Bookly Account</button></Link>
                     <Form.Group className="mb-2" controlId="formBasicEmail">
-                        <Link to="/login" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
+                        <Link to="/" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
                     </Form.Group>
                 </div>
             </div>
@@ -187,4 +186,4 @@ class VendorLogin extends React.Component {
         )
     }
 }
-export default (VendorLogin);
+export default (OwnerLogin);

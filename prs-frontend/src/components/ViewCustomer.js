@@ -22,34 +22,6 @@ export default class ViewCustomer extends React.Component {
                 <div className='vhome'>
                     <div className='vhome_container'>
                         <div className=''>
-                            {/* <table>
-                                <tr>
-                                    <th>Customer ID</th>
-                                    <th>Customer FirstName</th>
-                                    <th>Customer LastName</th>
-                                    <th>Customer Email</th>
-                                    <th>Customer Address</th>
-                                    <th>Customer ContactNumber</th>
-                                    <th>Customer Wallet</th>
-                                </tr>
-                                {
-                                    this.state.to.map(
-                                        (o) => {
-                                            return (
-                                                <tr>
-                                                    <td>{o.u_id}</td>
-                                                    <td>{o.u_fname}</td>
-                                                    <td>{o.u_lname}</td>
-                                                    <td>{o.u_email}</td>
-                                                    <td>{o.u_address}</td>
-                                                    <td>{o.u_phone}</td>
-                                                    <td>{o.wallet}</td>
-                                                </tr>
-                                            );
-                                        }
-                                    )
-                                }
-                            </table> */}
                             <Table striped bordered hover  style={{textAlign: 'center'}}>
                                 <thead>
                                     <tr style={{ backgroundColor: "#6e1230", color: "white" }}>
@@ -59,7 +31,6 @@ export default class ViewCustomer extends React.Component {
                                         <th>Customer Email</th>
                                         <th>Customer Address</th>
                                         <th>Customer ContactNumber</th>
-                                        <th>Customer Wallet</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,13 +39,12 @@ export default class ViewCustomer extends React.Component {
                                             (o) => {
                                                 return (
                                                     <tr>
-                                                        <td>{o.u_id}</td>
-                                                        <td>{o.u_fname}</td>
-                                                        <td>{o.u_lname}</td>
-                                                        <td>{o.u_email}</td>
-                                                        <td>{o.u_address}</td>
-                                                        <td>{o.u_phone}</td>
-                                                        <td>{o.wallet}</td>
+                                                        <td>{o.id}</td>
+                                                        <td>{o.fname}</td>
+                                                        <td>{o.lname}</td>
+                                                        <td>{o.email}</td>
+                                                        <td>{o.address}</td>
+                                                        <td>{o.phone}</td>
                                                     </tr>
                                                 );
                                             }

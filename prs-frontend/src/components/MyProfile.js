@@ -8,12 +8,12 @@ import { fontSize } from '@mui/system'
 
 function MyProfile() {
   const [myProfile, setMyProfile] = useState({
-    u_id: 0,
-    u_fname: '',
-    u_lname: '',
-    u_phone: '',
-    u_address: '',
-    u_email: '',
+  id: 0,
+  fname: '',
+  lname: '',
+  phone: '',
+  address: '',
+  email: '',
   })
   const [error, setError] = useState({
     titleerr: '',
@@ -25,7 +25,7 @@ function MyProfile() {
   useEffect(() => {
     const sign = JSON.parse(localStorage.getItem('data1'))
     httpService
-      .get(process.env.REACT_APP_BASE_URL + '/user/' + sign.u_id)
+      .get(process.env.REACT_APP_BASE_URL + '/user/' + sign.id)
       .then((res) => {
         console.log(JSON.stringify(res))
         setMyProfile(res.data)
@@ -49,12 +49,12 @@ function MyProfile() {
   const submitForm = async (e) => {
     e.preventDefault()
     let data = {
-      u_id: myProfile.u_id,
-      u_fname: myProfile.u_fname,
-      u_lname: myProfile.u_lname,
-      u_phone: myProfile.u_phone,
-      u_address: myProfile.u_address,
-      u_email: myProfile.u_email,
+      id: myProfile.id,
+      fname: myProfile.fname,
+      lname: myProfile.lname,
+      phone: myProfile.phone,
+      address: myProfile.address,
+      email: myProfile.email,
     }
 
     await httpService
@@ -81,8 +81,8 @@ function MyProfile() {
           <Form.Control
             type="text"
             placeholder="Enter First Name"
-            name="u_fname"
-            value={myProfile.u_fname}
+            name="fname"
+            value={myProfile.fname}
             onChange={handleChange}
           />
         </Form.Group>
@@ -92,8 +92,8 @@ function MyProfile() {
           <Form.Control
             type="text"
             placeholder="Enter Last Name"
-            name="u_lname"
-            value={myProfile.u_lname}
+            name="lname"
+            value={myProfile.lname}
             onChange={handleChange}
           />
         </Form.Group>
@@ -103,8 +103,8 @@ function MyProfile() {
           <Form.Control
             type="text"
             placeholder="Enter Phone"
-            name="u_phone"
-            value={myProfile.u_phone}
+            name="phone"
+            value={myProfile.phone}
             onChange={handleChange}
           />
         </Form.Group>
@@ -114,8 +114,8 @@ function MyProfile() {
           <Form.Control
             type="text"
             placeholder="Enter Address"
-            name="u_address"
-            value={myProfile.u_address}
+            name="address"
+            value={myProfile.address}
             onChange={handleChange}
           />
         </Form.Group>
@@ -125,8 +125,8 @@ function MyProfile() {
           <Form.Control
             type="text"
             placeholder="Enter Email"
-            name="u_email"
-            value={myProfile.u_email}
+            name="email"
+            value={myProfile.email}
             onChange={handleChange}
           />
         </Form.Group>

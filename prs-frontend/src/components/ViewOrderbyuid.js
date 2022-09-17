@@ -41,7 +41,7 @@ function ViewOrderbyuid() {
         }
         else {
             console.log(sign.uid);
-            fetch(process.env.REACT_APP_BASE_URL + "/getorderdatafromuid/" + sign.u_id)
+            fetch(process.env.REACT_APP_BASE_URL + "/getorderdatafromuid/" + sign.id)
                 .then(resp => resp.json())
                 .then(data => {
                     console.log(data);

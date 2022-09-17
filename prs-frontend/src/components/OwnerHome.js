@@ -1,9 +1,9 @@
 import React from 'react'
-import '../VendorHome.css';
+import '../OwnerHome.css';
 import { Button, Modal, Row, Table } from 'react-bootstrap';
 import Loader from './Loader';
 import { Rating } from 'react-simple-star-rating'
-export default class VendorHome extends React.Component {
+export default class OwnerHome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,7 @@ export default class VendorHome extends React.Component {
     componentDidMount = () => {
         this.setState({ loading: true })
         let sign = JSON.parse(localStorage.getItem('data1'));
-        const url = process.env.REACT_APP_BASE_URL + "/product/viewbyvid?v_id=" + sign.v_id;
+        const url = process.env.REACT_APP_BASE_URL + "/property/by_owner?id=" + sign.id;
         fetch(url)
             .then(resp => resp.json())
             .then(data => this.setState({ to: data, loading: false }));
@@ -86,7 +86,7 @@ export default class VendorHome extends React.Component {
                                                             </td>
                                                             <td>
                                                                 {o?.authors.map(author => (
-                                                                    <div key={author.id}>{author.a_name}</div>
+                                                                    <div key={author.id}>{author.name}</div>
                                                                 ))}
                                                             </td>
                                                             <td>

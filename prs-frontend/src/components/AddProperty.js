@@ -6,7 +6,8 @@ import { Form, Modal, Button } from 'react-bootstrap'
 import axios from 'axios'
 import Select from 'react-select'
 import Loader from './Loader'
-export default class AddProduct extends React.Component {
+import ModalForAddProperty from './ModalForAddProperty'
+export default class AddProperty extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -23,11 +24,17 @@ export default class AddProduct extends React.Component {
       selectedOption: '',
       selectedOption1: '',
       p_image: null,
-      isShowAddAuthorModal: false,
-      isShowAddPublisherModal: false,
+      isShowAddPropertyTypeModal: false,
+      isShowAddPropertyStructureTypeModal: false,
+      isShowAddFurnishedTypeModal: false,
+      isShowAddTenentTypeModal: false,
+      isShowAddParkingTypeModal: false,
       isLoading: false,
-      newAuthorName: '',
-      newPublisherName: '',
+      newPropertyType: '',
+      newPropertyStructureType: '',
+      newFurnishedType: '',
+      newTenentType: '',
+      newParkingType: '',
       error: {
         titleerr: '',
         describeerr: '',
@@ -37,15 +44,16 @@ export default class AddProduct extends React.Component {
         priceerr: '',
         ratingerr: '',
       },
-      c_types: [],
-      allAuthors: [],
-      allPublishers: [],
-      allCategories: [],
-      allLanguages: [],
-      selectedAuthors: [],
-      selectedPublishers: {},
-      selectedCategories: [],
-      selectedLanguage: [],
+      allPropertyTypes: [],
+      allFurnishedTypes: [],
+      allTenentTypes: [],
+      allParkingTypes: [],
+      allPropertyStructureTypes: [],
+      selectedPropertyType: [],
+      selectedPropertyStructureType: [],
+      selectedFurnishedType: [],
+      selectedParkingType: [],
+      selectedTenentType: [],
     }
     this.handleOption = this.handleOption.bind(this)
     this.onChangeImage = this.onChangeImage.bind(this)
@@ -131,16 +139,6 @@ export default class AddProduct extends React.Component {
   handleOption(e) {
     this.setState({ selectedOption: e.target.value })
   }
-  // convertImage = async (imageBlobUrl, imageName) => {
-  //     const formData = new FormData();
-  //     let blob = await fetch(imageBlobUrl).then((r) => r.blob());
-  //     var file = new File([blob], imageName);
-  //     formData.append("file", file);
-  //     console.log(formData);
-  //     return formData
-  //     // let res = await this.uploadImage(formData);
-  //     // return res.data;
-  // };
   async convertToFile(customerFabricImg, fabricImgType, fabricImgName) {
     if (fabricImgType === undefined) {
       return null
@@ -194,7 +192,7 @@ export default class AddProduct extends React.Component {
       'pprice': Number(this.state.price),
       'pqty': this.state.qty,
       'imageUrl': this.state.p_image,
-      'vId': sign.v_id,
+      'vId': sign.id,
       'noOfPages': Number(this.state.pages),
       'categoryIds': this.state.selectedCategories.map(c => c.value),
       'authorIds': this.state.selectedAuthors.map(a => a.value),
@@ -202,7 +200,7 @@ export default class AddProduct extends React.Component {
     }
     await axios.post(process.env.REACT_APP_BASE_URL + '/product', data)
       .then((resp) => {
-        window.location.href = '/vendor'
+        window.location.href = '/owner'
         resp.json()
       })
       .then((data) => {
@@ -215,139 +213,112 @@ export default class AddProduct extends React.Component {
   }
   componentDidMount() {
     this.setState({ isLoading: true })
-    axios.get(process.env.REACT_APP_BASE_URL + '/register/authors').then((res) => {
-      res.data.forEach(a => {
-        this.setState({ allAuthors: [...this.state.allAuthors, { value: a.a_id, label: a.a_name }] })
+    axios.get(process.env.REACT_APP_BASE_URL + '/register/property_type').then((catRes) => {
+      catRes.data.forEach(a => {
+        this.setState({ allPropertyTypes: [...this.state.allPropertyTypes, { value: a.id, label: a.name }] })
       })
-      axios.get(process.env.REACT_APP_BASE_URL + '/register/publishers').then((pubRes) => {
-        pubRes.data.forEach(a => {
-          this.setState({ allPublishers: [...this.state.allPublishers, { value: a.publisher_id, label: a.p_name }] })
+      axios.get(process.env.REACT_APP_BASE_URL + '/register/furnished_type').then((furnished_type) => {
+        furnished_type.data.forEach(a => {
+          this.setState({ allFurnishedTypes: [...this.state.allFurnishedTypes, { value: a.id, label: a.name }] })
         })
-        axios.get(process.env.REACT_APP_BASE_URL + '/category').then((catRes) => {
-          catRes.data.forEach(a => {
-            this.setState({ allCategories: [...this.state.allCategories, { value: a.c_id, label: a.c_name }] })
+        axios.get(process.env.REACT_APP_BASE_URL + '/register/tenent_type').then((tenent_type) => {
+          tenent_type.data.forEach(a => {
+            this.setState({ allTenentTypes: [...this.state.allTenentTypes, { value: a.id, label: a.name }] })
           })
-        }).catch((err) => { })
-        axios.get(process.env.REACT_APP_BASE_URL + '/register/languages').then((langRes) => {
-          langRes.data.forEach(a => {
-            this.setState({ isLoading: false })
-            this.setState({ allLanguages: [...this.state.allLanguages, { value: a.language_id, label: a.language }] })
-          })
+          axios.get(process.env.REACT_APP_BASE_URL + '/register/parking_type').then((parking_type) => {
+            parking_type.data.forEach(a => {
+              this.setState({ allParkingTypes: [...this.state.allParkingTypes, { value: a.id, label: a.name }] })
+            })
+            axios.get(process.env.REACT_APP_BASE_URL + '/register/property_structure_type').then((property_structure_type) => {
+              property_structure_type.data.forEach(a => {
+                this.setState({ allPropertyStructureTypes: [...this.state.allPropertyStructureTypes, { value: a.id, label: a.name }] })
+              })
+              this.setState({ isLoading: false })
+            }).catch((err) => { })
+          }).catch((err) => { })
         }).catch((err) => { })
       }).catch((err) => { })
     }).catch((err) => { })
   }
-  onClickAddAuthor = () => {
-    this.setState({ isShowAddAuthorModal: false })
+  onClickAdd = (endpoint, modal, allValueState, selectedValueState) => {
+    this.setState({ [modal]: false })
     let data = {
-      a_name: this.state.newAuthorName
+      p_name: this.state.newPropertyType
     }
-    axios.post(process.env.REACT_APP_BASE_URL + '/register/author', data).then((res) => {
-      console.log(res.data)
-      this.setState({
-        isShowAddAuthorModal: false, allAuthors: [...this.state.allAuthors, { value: res.data.a_id, label: res.data.a_name }],
-        selectedAuthors: [...this.state.selectedAuthors, { value: res.data.a_id, label: res.data.a_name }]
-      })
-    }).catch((err) => { })
-  }
-  onClickAddPublisher = () => {
-    this.setState({ isShowAddPublisherModal: false })
-    let data = {
-      p_name: this.state.newPublisherName
-    }
-    axios.post(process.env.REACT_APP_BASE_URL + '/register/publisher', data).then((res) => {
+    axios.post(process.env.REACT_APP_BASE_URL + '/register/' + endpoint, data).then((res) => {
       console.log(res)
       this.setState({
         isShowAddPublisherModal: false,
-        allPublishers: [...this.state.allPublishers, { value: res.data.publisher_id, label: res.data.p_name }],
-        selectedPublishers: { value: res.data.publisher_id, label: res.data.p_name }
+        [allValueState]: [...this.state[allValueState], { value: res.data.id, label: res.data.name }],
+        [selectedValueState]: { value: res.data.id, label: res.data.name }
       })
     }).catch((err) => { })
   }
-  onChangeAuthor = (selectedOption) => {
+  onChangePropertyType = (selectedOption) => {
     console.log(selectedOption)
-    this.setState({ selectedAuthors: selectedOption })
+    this.setState({ selectedPropertyType: selectedOption })
   }
-  onChangePublisher = (selectedOption) => {
-    this.setState({ selectedPublishers: selectedOption })
+  onChangePropertyStructureType = (selectedOption) => {
+    this.setState({ selectedPropertyStructureType: selectedOption })
   }
-  onChangeCategory = (selectedOption) => {
-    this.setState({ selectedCategories: selectedOption })
+  onChangeFurnishedType = (selectedOption) => {
+    this.setState({ selectedFurnishedType: selectedOption })
   }
-  onChangeLanguage = (selectedOption) => {
-    this.setState({ selectedLanguage: selectedOption })
+  onChangeParkingType = (selectedOption) => {
+    this.setState({ selectedParkingType: selectedOption })
+  }
+  onChangeTenentType = (selectedOption) => {
+    this.setState({ selectedTenentType: selectedOption })
   }
   render() {
     console.log(this.state.p_image)
     return (
       <div className="register">
-        {/* add new author */}
-        <Modal
-          show={this.state.isShowAddAuthorModal}
-          onHide={() => this.setState({ isShowAddAuthorModal: false })}
-          // size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              Add Author
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form.Group className="mb-2" controlId="formBasicEmail">
-              <Form.Label>Enter author name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter author"
-                name="title"
-                value={this.state.newAuthorName}
-                onChange={(e) => { this.setState({ newAuthorName: e.target.value }) }}
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => this.setState({ isShowAddAuthorModal: false })}>Close</Button>
-            <Button variant="success"
-              disabled={this.state.newAuthorName === ''} onClick={this.onClickAddAuthor}>Add</Button>
-          </Modal.Footer>
-        </Modal>
-
-        {/* add new publisher */}
-        <Modal
-          show={this.state.isShowAddPublisherModal}
-          onHide={() => this.setState({ isShowAddPublisherModal: false })}
-          // size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              Add Publisher
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form.Group className="mb-2" controlId="formBasicEmail">
-              <Form.Label>Enter publisher name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter publisher"
-                name="title"
-                value={this.state.newPublisherName}
-                onChange={(e) => { this.setState({ newPublisherName: e.target.value }) }}
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => this.setState({ isShowAddPublisherModal: false })}>Close</Button>
-            <Button variant="success"
-              disabled={this.state.newPublisherName === ''} onClick={this.onClickAddPublisher}>Add</Button>
-          </Modal.Footer>
-        </Modal>
+        {/* add new property type */}
+        <ModalForAddProperty
+          show={this.state.isShowAddPropertyTypeModal}
+          inputValue={newPropertyType}
+          setValue={(value) => this.setState({ newPropertyType: value })}
+          label={"Property Type "}
+          onClickAdd={() => this.onClickAdd("property_type", "isShowAddPropertyTypeModal", "allPropertyTypes", "selectedPropertyType")}
+          onClose={() => this.setState({ isShowAddPropertyTypeModal: false })}
+        />
+        <ModalForAddProperty
+          show={this.state.isShowAddPropertyStructureTypeModal}
+          inputValue={newPropertyStructureType}
+          setValue={(value) => this.setState({ newPropertyStructureType: value })}
+          label={"Property Structure Type"}
+          onClickAdd={() => this.onClickAdd("property_structure_type", "isShowAddPropertyStructureTypeModal", "allPropertyStructureTypes", "selectedPropertyStructureType")}
+          onClose={() => this.setState({ isShowAddPropertyStructureTypeModal: false })}
+        />
+        <ModalForAddProperty
+          show={this.state.isShowAddFurnishedTypeModal}
+          inputValue={newFurnishedType}
+          setValue={(value) => this.setState({ newFurnishedType: value })}
+          label={"Furnished Type"}
+          onClickAdd={() => this.onClickAdd("furnished_type", "isShowAddFurnishedTypeModal", "allFurnishedTypes", "selectedFurnishedType")}
+          onClose={() => this.setState({ isShowAddFurnishedTypeModal: false })}
+        />
+        <ModalForAddProperty
+          show={this.state.isShowAddTenentTypeModal}
+          inputValue={newTenentType}
+          setValue={(value) => this.setState({ newTenentType: value })}
+          label={"Tenent Type "}
+          onClickAdd={() => this.onClickAdd("tenent_type", "isShowAddTenentTypeModal", "allTenentTypes", "selectedTenentType")}
+          onClose={() => this.setState({ isShowAddTenentTypeModal: false })}
+        />
+        <ModalForAddProperty
+          show={this.state.isShowAddParkingTypeModal}
+          inputValue={newParkingType}
+          setValue={(value) => this.setState({ newParkingType: value })}
+          label={"Parking Type "}
+          onClickAdd={() => this.onClickAdd("parking_type", "isShowAddParkingTypeModal", "allParkingTypes", "selectedParkingType")}
+          onClose={() => this.setState({ isShowAddParkingTypeModal: false })}
+        />
         {this.state.isLoading ? <Loader /> :
           <div className="register_container">
             <Form.Group className="mb-2" controlId="formBasicEmail">
-              <Form.Label>Product Title</Form.Label>
+              <Form.Label>Property Title</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter Product Title"
@@ -357,21 +328,31 @@ export default class AddProduct extends React.Component {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Select Category</Form.Label>
+              <Form.Label>Select Tenent Type</Form.Label>
               <Select
-                options={this.state.allCategories}
-                placeholder="Select Category"
+                options={this.state.allPropertyTypes}
+                placeholder="Select Property Type"
                 isMulti={true}
                 onChange={this.onChangeCategory}
-                value={this.state.selectedCategories}
+                value={this.state.selectedParkingType}
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Select Author</Form.Label>
+              <Form.Label>Select Parking Type</Form.Label>
+              <Select
+                options={this.state.allParkingTypes}
+                placeholder="Select Parking Type"
+                isMulti={true}
+                onChange={this.onChangeCategory}
+                value={this.state.selectedParkingType}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Select Furnished Type</Form.Label>
               <Select
                 options={this.state.allAuthors}
-                placeholder="Select Author"
-                isMulti={true}
+                placeholder="Select Furnished Type"
+                isMulti={false}
                 onChange={this.onChangeAuthor}
                 value={this.state.selectedAuthors}
               />
@@ -380,27 +361,17 @@ export default class AddProduct extends React.Component {
               </span>
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Select Publisher</Form.Label>
+              <Form.Label>Select Property Structure Type</Form.Label>
               <Select
-                options={this.state.allPublishers}
-                placeholder="Select Publisher"
+                options={this.state.allPropertyStructureTypes}
+                placeholder="Select Property Structure Type"
                 isMulti={false}
-                onChange={this.onChangePublisher}
-                value={this.state.selectedPublishers}
+                onChange={this.onChangePropertyStructureType}
+                value={this.state.selectedPropertyStructureType}
               />
               <span style={{ cursor: "pointer", color: "blue" }}
-                onClick={() => this.setState({ isShowAddPublisherModal: true })}>Not in list? or Add new publisher
+                onClick={() => this.setState({ isShowAddAuthorModal: true })}>Not in list? or Add
               </span>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Select Language</Form.Label>
-              <Select
-                options={this.state.allLanguages}
-                placeholder="Select Language"
-                isMulti={false}
-                onChange={this.onChangeLanguage}
-                value={this.state.selectedLanguage}
-              />
             </Form.Group>
 
             <Form.Group className="mb-2" controlId="formBasicEmail">
@@ -457,7 +428,7 @@ export default class AddProduct extends React.Component {
                 />
               </div>
             )}
-            <Link to="/vendor">
+            <Link to="/owner">
               {' '}
               <button
                 className="innerbutton"

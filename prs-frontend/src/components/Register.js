@@ -123,19 +123,19 @@ export default class Register extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                u_fname: this.state.fname,
-                u_lname: this.state.lname,
-                u_phone: this.state.contactno,
-                u_address: this.state.address,
-                u_email: this.state.email,
-                u_password: this.state.password,
+                fname: this.state.fname,
+                lname: this.state.lname,
+                phone: this.state.contactno,
+                address: this.state.address,
+                email: this.state.email,
+                password: this.state.password,
             })
         };
 
         await fetch(process.env.REACT_APP_BASE_URL+"/user/adduser", reqData)
             .then(resp => resp.json())
             .then(data => this.setState({ st: data, success: true }));
-        window.location.href = "/login";
+        window.location.href = "/";
 
     }
     render() {
@@ -179,7 +179,7 @@ export default class Register extends React.Component {
                         <Link to="register" ><button className='innerbutton' type="submit" onClick={this.submitForm}>Sign Up</button></Link><br />
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formBasicEmail">
-                        <Link to="/login" ><button className='innerbutton'><ArrowBackIcon/>Back</button></Link><br />
+                        <Link to="/" ><button className='innerbutton'><ArrowBackIcon/>Back</button></Link><br />
                     </Form.Group>
                     <span>{this.state.error.emailerr}{this.state.error.fnameerr}{this.state.error.lnameerr}{this.state.error.addresserr}<br />
                         {this.state.error.pwderr}{this.state.error.contactnoerr}</span>

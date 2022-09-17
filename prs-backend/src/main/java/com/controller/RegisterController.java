@@ -17,15 +17,15 @@ public class RegisterController {
     private RegistrationService registrationService;
 
 
-    @PostMapping("/furnishedType")
+    @PostMapping("/furnished_type")
     public ResponseEntity<Category> registerAuthor(@RequestBody Category category)
     {
-        category.setC_categoryType(RegistrationService.FURNISHED_TYPE);
+        category.setCategoryType(RegistrationService.FURNISHED_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
     }
 
-    @GetMapping("/furnishedType")
+    @GetMapping("/furnished_type")
     public ResponseEntity<List<Category>> getFurnishedType()
     {
         return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.FURNISHED_TYPE));
@@ -33,58 +33,58 @@ public class RegisterController {
 
 
 
-    @PostMapping("/tenentType")
+    @PostMapping("/tenent_type")
     public ResponseEntity<Category> registerTenent(@RequestBody Category category)
     {
-        category.setC_categoryType(RegistrationService.TENENT_TYPE);
+        category.setCategoryType(RegistrationService.TENENT_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
     }
 
-    @GetMapping("/tenentType")
+    @GetMapping("/tenent_type")
     public ResponseEntity<List<Category>> getTenentType()
     {
         return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.TENENT_TYPE));
     }
 
-    @PostMapping("/parkingType")
+    @PostMapping("/parking_type")
     public ResponseEntity<Category> registerparkingType(@RequestBody Category category)
     {
-        category.setC_categoryType(RegistrationService.TENENT_TYPE);
+        category.setCategoryType(RegistrationService.TENENT_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
     }
 
-    @GetMapping("/parkingType")
+    @GetMapping("/parking_type")
     public ResponseEntity<List<Category>> getparkingType()
     {
         return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.TENENT_TYPE));
     }
 
     /*BHKs*/
-    @PostMapping("/propertyStructureType")
+    @PostMapping("/property_structure_type")
     public ResponseEntity<Category> registerpropertyStructureType(@RequestBody Category category)
     {
-        category.setC_categoryType(RegistrationService.PROPERTY_STRUCTURE_TYPE);
+        category.setCategoryType(RegistrationService.PROPERTY_STRUCTURE_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
     }
 
-    @GetMapping("/propertyStructureType")
+    @GetMapping("/property_structure_type")
     public ResponseEntity<List<Category>> getpropertyStructureType()
     {
         return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.PROPERTY_STRUCTURE_TYPE));
     }
 
-    @PostMapping("/propertyType")
+    @PostMapping("/property_type")
     public ResponseEntity<Category> registerpropertyType(@RequestBody Category category)
     {
-        category.setC_categoryType(RegistrationService.PROPERTY_STRUCTURE_TYPE);
+        category.setCategoryType(RegistrationService.PROPERTY_STRUCTURE_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
     }
 
-    @GetMapping("/propertyType")
+    @GetMapping("/property_type")
     public ResponseEntity<List<Category>> getpropertyType()
     {
         return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.PROPERTY_STRUCTURE_TYPE));

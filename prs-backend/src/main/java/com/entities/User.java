@@ -9,14 +9,14 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private int u_id;
+	private int id;
 	
-	private String u_fname;
-	private String u_lname;
-	private String u_phone;
-	private String u_address;
-	private String u_email;
-	private String u_password;
+	private String fname;
+	private String lname;
+	private String phone;
+	private String address;
+	private String email;
+	private String password;
 
 
 	@ManyToMany(mappedBy = "intrestedUser", cascade = { CascadeType.ALL })
@@ -30,81 +30,75 @@ public class User {
 	
 
 
-	public User(int u_id, String u_fname, String u_lname, String u_phone, String u_address, String u_email,
-			String u_password, float wallet) {
+	public User(int id, String fname, String lname, String phone, String address, String u_email,
+				String password, float wallet) {
 		super();
-		this.u_id = u_id;
-		this.u_fname = u_fname;
-		this.u_lname = u_lname;
-		this.u_phone = u_phone;
-		this.u_address = u_address;
-		this.u_email = u_email;
-		this.u_password = u_password;
+		this.id = id;
+		this.fname = fname;
+		this.lname = lname;
+		this.phone = phone;
+		this.address = address;
+		this.email = u_email;
+		this.password = password;
 	}
 
 
-	public int getU_id() {
-		return u_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setU_id(int u_id) {
-		this.u_id = u_id;
+	public void setId(int u_id) {
+		this.id = u_id;
 	}
 
-	public String getU_phone() {
-		return u_phone;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setU_phone(String u_phone) {
-		this.u_phone = u_phone;
+	public void setPhone(String u_phone) {
+		this.phone = u_phone;
 	}
 
-	public String getU_address() {
-		return u_address;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setU_address(String u_address) {
-		this.u_address = u_address;
+	public void setAddress(String u_address) {
+		this.address = u_address;
 	}
 
-	public String getU_email() {
-		return u_email;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setU_email(String u_email) {
-		this.u_email = u_email;
+	public void setEmail(String u_email) {
+		this.email = u_email;
 	}
 
-	public String getU_password() {
-		return u_password;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setU_password(String u_password) {
-		this.u_password = u_password;
-	}
-
-	@Override
-	public String toString() {
-		return "User [u_id=" + u_id + ", u_fname=" + u_fname + ", u_lname=" + u_lname + ", u_phone=" + u_phone
-				+ ", u_address=" + u_address + ", u_email=" + u_email + ", u_password=" + u_password
-				 + "]";
+	public void setPassword(String u_password) {
+		this.password = u_password;
 	}
 
 
-	public String getU_fname() {
-		return u_fname;
+
+	public String getFname() {
+		return fname;
 	}
 
-	public void setU_fname(String u_fname) {
-		this.u_fname = u_fname;
+	public void setFname(String u_fname) {
+		this.fname = u_fname;
 	}
 
-	public String getU_lname() {
-		return u_lname;
+	public String getLname() {
+		return lname;
 	}
 
-	public void setU_lname(String u_lname) {
-		this.u_lname = u_lname;
+	public void setLname(String u_lname) {
+		this.lname = u_lname;
 	}
 
 	public Set<Property> getProperties() {

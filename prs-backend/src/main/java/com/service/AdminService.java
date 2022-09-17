@@ -15,9 +15,9 @@ public class AdminService
 	public ResponseEntity loginAdmin(Admin admin)
 	{
 		// TODO Auto-generated method stub
-		Admin admin1=adminrepo.findByEmail(admin.getA_email(),admin.getA_password());
+		Admin admin1=adminrepo.findByEmail(admin.getEmail(),admin.getPassword());
 		
-		if(admin1!= null && admin1.getA_email().equals(admin.getA_email())&&admin1.getA_password().equals(admin.getA_password()))
+		if(admin1!= null && admin1.getEmail().equals(admin.getEmail())&&admin1.getPassword().equals(admin.getPassword()))
 			return new ResponseEntity<Admin>(admin1,HttpStatus.ACCEPTED);
 		else
 				return new ResponseEntity<String>("Wrong Username and Password",HttpStatus.FORBIDDEN);

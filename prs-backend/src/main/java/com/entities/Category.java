@@ -9,11 +9,11 @@ public class Category {
 
 	@Id
 	@GeneratedValue
-	private int c_id;
+	private int id;
 
-	private String c_name;
+	private String name;
 
-	private String c_categoryType;
+	private String categoryType;
 
 	@ManyToMany(mappedBy = "categories", cascade = { CascadeType.ALL })
 	private Set<Property> properties;
@@ -23,36 +23,36 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(String c_name) {
+	public Category(String name) {
 		super();
-		this.c_name = c_name;
+		this.name = name;
 	}
-	public int getC_id() {
-		return c_id;
+	public int getId() {
+		return id;
 	}
-	public void setC_id(int c_id) {
-		this.c_id = c_id;
-	}
-
-	public String getC_name() {
-		return c_name;
+	public void setId(int c_id) {
+		this.id = c_id;
 	}
 
-	public void setC_name(String c_name) {
-		this.c_name = c_name;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String c_name) {
+		this.name = c_name;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [c_id=" + c_id  + "]";
+		return "Category [c_id=" + id + "]";
 	}
 
-	public String getC_categoryType() {
-		return c_categoryType;
+	public String getCategoryType() {
+		return categoryType;
 	}
 
-	public void setC_categoryType(String c_categoryType) {
-		this.c_categoryType = c_categoryType;
+	public void setCategoryType(String c_categoryType) {
+		this.categoryType = c_categoryType;
 	}
 
 	public Set<Property> getProperties() {

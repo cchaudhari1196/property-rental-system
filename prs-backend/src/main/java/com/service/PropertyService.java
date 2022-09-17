@@ -44,15 +44,19 @@ public class PropertyService {
 		return propertyRepository.getByCategoryName(category);
 	}
 
-	public List<Property> getProductsByCategoryId(Integer categoryId) {
+	public List<Property> getPropertiesByCategoryId(Integer categoryId) {
 		return propertyRepository.getByCategoryId(categoryId);
+	}
+
+	public List<Property> getPropertiesByCity(String city) {
+		return propertyRepository.findByCityEqualsIgnoreCase(city);
 	}
 
 	public List<Property> getByVid(int v_id) {
 		return propertyRepository.getByVid(v_id);
 	}
 
-	public int addproduct(com.models.Property property) throws Exception {
+	public int addProperty(com.models.Property property) throws Exception {
 		try{
 			Property propertyEntity = new Property();
 			propertyEntity.setPname(property.getPname());
@@ -62,13 +66,13 @@ public class PropertyService {
 			Set<Category> categories = property.getCategoryIds()
 							.stream().map(e-> categoryservice.getCategoryById(e)).collect(Collectors.toSet());
 			propertyEntity.setCategories(categories);
-			propertyEntity.setOwner(ownerService.getVendor(property.getvId()));
+			propertyEntity.setOwner(ownerService.getOwner(property.getOwnerId()));
 			propertyRepository.save(propertyEntity);
-			return propertyEntity.getP_id();
+			return propertyEntity.getId();
 		}
 		catch (Exception ex){
 			ex.printStackTrace();
-			throw new Exception("Adding product failed"+ ex.getMessage());
+			throw new Exception("Adding Property failed"+ ex.getMessage());
 		}
 	}
 }

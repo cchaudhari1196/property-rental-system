@@ -11,94 +11,86 @@ public class Owner {
 
 	@Id
 	@GeneratedValue
-	private int v_id;
+	private int id;
 	
-	private String v_name;
-	private long v_phone;
-	private String v_address;
-	private String v_email;
-	private String v_password;
-	private Boolean v_status= false;
+	private String name;
+	private long phone;
+	private String address;
+	private String email;
+	private String password;
+	private Boolean status = false;
 	
 	public Owner() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Owner(int v_id, String v_name, long v_phone, String v_address, String v_email, String v_password) {
+	public Owner(int id, String name, long phone, String address, String email, String password) {
 		super();
-		this.v_id = v_id;
-		this.v_name = v_name;
-		this.v_phone = v_phone;
-		this.v_address = v_address;
-		this.v_email = v_email;
-		this.v_password = v_password;
-		this.v_status = false;
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.address = address;
+		this.email = email;
+		this.password = password;
+		this.status = false;
 	}
 
-	public int getV_id() {
-		return v_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setV_id(int v_id) {
-		this.v_id = v_id;
+	public void setId(int v_id) {
+		this.id = v_id;
 	}
 
-	public String getV_name() {
-		return v_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setV_name(String v_name) {
-		this.v_name = v_name;
+	public void setName(String v_name) {
+		this.name = v_name;
 	}
 
-	public long getV_phone() {
-		return v_phone;
+	public long getPhone() {
+		return phone;
 	}
 
-	public void setV_phone(long v_phone) {
-		this.v_phone = v_phone;
+	public void setPhone(long v_phone) {
+		this.phone = v_phone;
 	}
 
-	public String getV_address() {
-		return v_address;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setV_address(String v_address) {
-		this.v_address = v_address;
+	public void setAddress(String v_address) {
+		this.address = v_address;
 	}
 
-	public String getV_email() {
-		return v_email;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setV_email(String v_email) {
-		this.v_email = v_email;
+	public void setEmail(String v_email) {
+		this.email = v_email;
 	}
 
-	public String getV_password() {
-		return v_password;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setV_password(String v_password) {
-		this.v_password = v_password;
+	public void setPassword(String v_password) {
+		this.password = v_password;
 	}
 
-	public Boolean getV_status() {
-		return v_status;
+	public Boolean getStatus() {
+		return status;
 	}
 
-	public void setV_status(Boolean v_status) {
-		this.v_status = v_status;
+	public void setStatus(Boolean v_status) {
+		this.status = v_status;
 	}
 
 
-	@Override
-	public String toString() {
-		return "Vendor [v_id=" + v_id + ", v_name=" + v_name + ", v_phone=" + v_phone + ", v_address=" + v_address
-				+ ", v_email=" + v_email + ", v_password=" + v_password + "]";
-	}
-	
-	
-	
 }

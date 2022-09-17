@@ -29,9 +29,9 @@ public class UserService
 	public User loginUser(User user) {
 		// TODO Auto-generated method stub
 		
-		User user1=userrepo.findByEmail(user.getU_email(),user.getU_password());
+		User user1=userrepo.findByEmail(user.getEmail(),user.getPassword());
 		
-		if(user1!=null && user1.getU_email().equals(user.getU_email())&& user1.getU_password().equals(user.getU_password()))
+		if(user1!=null && user1.getEmail().equals(user.getEmail())&& user1.getPassword().equals(user.getPassword()))
 			return user1 ;
 		else
 			return null;
@@ -42,13 +42,13 @@ public class UserService
 	public User updateUser(User user) {
 		// TODO Auto-generated method stub
 		User existinguser;
-		existinguser=userrepo.findById(user.getU_id()).orElse(null);
+		existinguser=userrepo.findById(user.getId()).orElse(null);
 		if(existinguser != null) {
-			existinguser.setU_fname(user.getU_fname());
-			existinguser.setU_lname(user.getU_lname());
-			existinguser.setU_phone(user.getU_phone());
-			existinguser.setU_email(user.getU_email());
-			existinguser.setU_address(user.getU_address());
+			existinguser.setFname(user.getFname());
+			existinguser.setLname(user.getLname());
+			existinguser.setPhone(user.getPhone());
+			existinguser.setEmail(user.getEmail());
+			existinguser.setAddress(user.getAddress());
 		}
 		
 		return userrepo.save(existinguser);

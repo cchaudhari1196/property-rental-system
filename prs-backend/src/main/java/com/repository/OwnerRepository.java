@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 @Repository
 public interface OwnerRepository extends JpaRepository<Owner, Integer>
 {
-	@Query(value="select * from Vendor where v_email=?1 AND v_password=?2",nativeQuery = true)
-    Owner findByEmail(String v_email, String v_password);
+	@Query(value="select * from Owner where email=?1 AND password=?2",nativeQuery = true)
+    Owner findByEmail(String email, String password);
 
 }

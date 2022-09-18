@@ -8,9 +8,9 @@ public class Property {
     private Integer rent;
     private Integer deposite;
     private String imageUrl;
-    private Integer vId;
-    private String pname;
-    private String pdesc;
+    private Integer ownerId;
+    private String name;
+    private String desc;
     private String address;
     private String city;
     private String area;
@@ -58,28 +58,28 @@ public class Property {
         this.imageUrl = imageUrl;
     }
 
-    public Integer getvId() {
-        return vId;
+    public Integer getOwnerId() {
+        return ownerId;
     }
 
-    public void setvId(Integer vId) {
-        this.vId = vId;
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public String getPname() {
-        return pname;
+    public String getName() {
+        return name;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPdesc() {
-        return pdesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setPdesc(String pdesc) {
-        this.pdesc = pdesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getAddress() {

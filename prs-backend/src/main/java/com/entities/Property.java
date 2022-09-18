@@ -1,14 +1,12 @@
 package com.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Table
@@ -16,12 +14,12 @@ import java.util.Set;
 public class Property {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int p_id;
+	private int id;
 	
-	private String pname;
+	private String name;
 
 	@Column(columnDefinition = "TEXT")
-	private String pdesc;
+	private String description;
 
 	private float rent;
 
@@ -38,18 +36,17 @@ public class Property {
 	private Timestamp timestamp;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "v_id")
-//	@JsonProperty(access = Access.WRITE_ONLY)
+	@JoinColumn(name = "owner_id")
 	private Owner owner;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
-			name="products_categories",
+			name="properties_categories",
 			joinColumns = {
-					@JoinColumn(name = "p_id")
+					@JoinColumn(name = "property_id")
 			},
 			inverseJoinColumns = {
-					@JoinColumn(name = "c_id")
+					@JoinColumn(name = "category_id")
 			}
 	)
 	@ReadOnlyProperty
@@ -58,12 +55,12 @@ public class Property {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
-			name="products_intrested_user",
+			name="properties_intrested_user",
 			joinColumns = {
-					@JoinColumn(name = "p_id")
+					@JoinColumn(name = "property_id")
 			},
 			inverseJoinColumns = {
-					@JoinColumn(name = "u_id")
+					@JoinColumn(name = "user_id")
 			}
 	)
 	@ReadOnlyProperty
@@ -75,28 +72,28 @@ public class Property {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getP_id() {
-		return p_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setP_id(int p_id) {
-		this.p_id = p_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getPname() {
-		return pname;
+	public String getName() {
+		return name;
 	}
 
-	public void setPname(String pname) {
-		this.pname = pname;
+	public void setName(String pname) {
+		this.name = pname;
 	}
 
-	public String getPdesc() {
-		return pdesc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setPdesc(String pdesc) {
-		this.pdesc = pdesc;
+	public void setDescription(String pdesc) {
+		this.description = pdesc;
 	}
 
 

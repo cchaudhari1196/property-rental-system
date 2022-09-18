@@ -9,68 +9,68 @@ import org.springframework.stereotype.Service;
 public class OwnerService
 {
 	@Autowired
-	private OwnerRepository vendorrepo;
+	private OwnerRepository ownerRepository;
 
 	//register
-	public Owner registerVendor(Owner owner)
+	public Owner registerOwner(Owner owner)
 	{
 		// TODO Auto-generated method stub
-			return vendorrepo.save(owner);
+			return ownerRepository.save(owner);
 	}
 
 	//login
-	public Owner loginVendor(Owner owner)
+	public Owner loginOwner(Owner owner)
 	{
 		// TODO Auto-generated method stub
 		
-		Owner owner1 =vendorrepo.findByEmail(owner.getV_email(), owner.getV_password());
+		Owner owner1 = ownerRepository.findByEmail(owner.getEmail(), owner.getPassword());
 		
-		if(owner1 !=null && owner1.getV_email().equals(owner.getV_email())&& owner1.getV_password().equals(owner.getV_password()))
+		if(owner1 !=null && owner1.getEmail().equals(owner.getEmail())&& owner1.getPassword().equals(owner.getPassword()))
 			return owner1;
 		else
 				return null;
 	}
 	
 	//update
-	public Owner updateVendor(Owner owner) {
+	public Owner updateOwner(Owner owner) {
 		// TODO Auto-generated method stub
-		Owner existingvendor;
-		existingvendor=vendorrepo.findById(owner.getV_id()).orElse(null);
-		existingvendor.setV_name(owner.getV_name());
-		existingvendor.setV_phone(owner.getV_phone());
-		existingvendor.setV_email(owner.getV_email());
-		existingvendor.setV_password(owner.getV_password());
-		existingvendor.setV_address(owner.getV_address());
+		Owner existingowner;
+		existingowner= ownerRepository.findById(owner.getId()).orElse(null);
+		existingowner.setName(owner.getName());
+		existingowner.setPhone(owner.getPhone());
+		existingowner.setEmail(owner.getEmail());
+		existingowner.setPassword(owner.getPassword());
+		existingowner.setAddress(owner.getAddress());
 		
-		return vendorrepo.save(existingvendor);
+		return ownerRepository.save(existingowner);
 	}
 
 
-	public boolean deleteVendor(int v_id) {
+	public boolean deleteOwner(int v_id) {
 		// TODO Auto-generated method stub
 		
-		vendorrepo.deleteById(v_id);
+		ownerRepository.deleteById(v_id);
 		return true;
 		
 	}
 
 
-	public Owner getVendor(int v_id) {
+	public Owner getOwner(int v_id) {
 		// TODO Auto-generated method stub
-		return vendorrepo.findById(v_id).orElse(null);
+		return ownerRepository.findById(v_id).orElse(null);
 	}
 
 
-	public java.util.List<Owner> allVendor() {
+	public java.util.List<Owner> allOwner() {
 		// TODO Auto-generated method stub
-		return vendorrepo.findAll();
+		return ownerRepository.findAll();
 	}
 
-	public Owner approveVendor(int v_id, Boolean v_status) {
-		Owner owner = vendorrepo.findById(v_id).orElse(null);
+	public Owner approveOwner(int v_id, Boolean v_status) {
+		Owner owner = ownerRepository.findById(v_id).orElse(null);
 		if(owner != null){
-			owner.setV_status(v_status);
-			return vendorrepo.save(owner);
+			owner.setStatus(v_status);
+			return ownerRepository.save(owner);
 		}
 		return null;
 	}

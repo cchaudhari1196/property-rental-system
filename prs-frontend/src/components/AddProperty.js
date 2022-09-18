@@ -2,7 +2,7 @@ import React from 'react'
 import '../register.css'
 import { Link } from 'react-router-dom'
 import 'react-dropdown/style.css'
-import { Form, Modal, Button } from 'react-bootstrap'
+import { Form, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
 import Select from 'react-select'
 import Loader from './Loader'
@@ -277,7 +277,7 @@ export default class AddProperty extends React.Component {
         {/* add new property type */}
         <ModalForAddProperty
           show={this.state.isShowAddPropertyTypeModal}
-          inputValue={newPropertyType}
+          inputValue={this.state.newPropertyType}
           setValue={(value) => this.setState({ newPropertyType: value })}
           label={"Property Type "}
           onClickAdd={() => this.onClickAdd("property_type", "isShowAddPropertyTypeModal", "allPropertyTypes", "selectedPropertyType")}
@@ -285,7 +285,7 @@ export default class AddProperty extends React.Component {
         />
         <ModalForAddProperty
           show={this.state.isShowAddPropertyStructureTypeModal}
-          inputValue={newPropertyStructureType}
+          inputValue={this.state.newPropertyStructureType}
           setValue={(value) => this.setState({ newPropertyStructureType: value })}
           label={"Property Structure Type"}
           onClickAdd={() => this.onClickAdd("property_structure_type", "isShowAddPropertyStructureTypeModal", "allPropertyStructureTypes", "selectedPropertyStructureType")}
@@ -293,7 +293,7 @@ export default class AddProperty extends React.Component {
         />
         <ModalForAddProperty
           show={this.state.isShowAddFurnishedTypeModal}
-          inputValue={newFurnishedType}
+          inputValue={this.state.newFurnishedType}
           setValue={(value) => this.setState({ newFurnishedType: value })}
           label={"Furnished Type"}
           onClickAdd={() => this.onClickAdd("furnished_type", "isShowAddFurnishedTypeModal", "allFurnishedTypes", "selectedFurnishedType")}
@@ -301,7 +301,7 @@ export default class AddProperty extends React.Component {
         />
         <ModalForAddProperty
           show={this.state.isShowAddTenentTypeModal}
-          inputValue={newTenentType}
+          inputValue={this.state.newTenentType}
           setValue={(value) => this.setState({ newTenentType: value })}
           label={"Tenent Type "}
           onClickAdd={() => this.onClickAdd("tenent_type", "isShowAddTenentTypeModal", "allTenentTypes", "selectedTenentType")}
@@ -309,7 +309,7 @@ export default class AddProperty extends React.Component {
         />
         <ModalForAddProperty
           show={this.state.isShowAddParkingTypeModal}
-          inputValue={newParkingType}
+          inputValue={this.state.newParkingType}
           setValue={(value) => this.setState({ newParkingType: value })}
           label={"Parking Type "}
           onClickAdd={() => this.onClickAdd("parking_type", "isShowAddParkingTypeModal", "allParkingTypes", "selectedParkingType")}
@@ -317,138 +317,167 @@ export default class AddProperty extends React.Component {
         />
         {this.state.isLoading ? <Loader /> :
           <div className="register_container">
-            <Form.Group className="mb-2" controlId="formBasicEmail">
-              <Form.Label>Property Title</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Product Title"
-                name="title"
-                value={this.state.title}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Select Tenent Type</Form.Label>
-              <Select
-                options={this.state.allPropertyTypes}
-                placeholder="Select Property Type"
-                isMulti={true}
-                onChange={this.onChangeCategory}
-                value={this.state.selectedParkingType}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Select Parking Type</Form.Label>
-              <Select
-                options={this.state.allParkingTypes}
-                placeholder="Select Parking Type"
-                isMulti={true}
-                onChange={this.onChangeCategory}
-                value={this.state.selectedParkingType}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Select Furnished Type</Form.Label>
-              <Select
-                options={this.state.allAuthors}
-                placeholder="Select Furnished Type"
-                isMulti={false}
-                onChange={this.onChangeAuthor}
-                value={this.state.selectedAuthors}
-              />
-              <span style={{ cursor: "pointer", color: "blue" }}
-                onClick={() => this.setState({ isShowAddAuthorModal: true })}>Not in list? or Add new author
-              </span>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Select Property Structure Type</Form.Label>
-              <Select
-                options={this.state.allPropertyStructureTypes}
-                placeholder="Select Property Structure Type"
-                isMulti={false}
-                onChange={this.onChangePropertyStructureType}
-                value={this.state.selectedPropertyStructureType}
-              />
-              <span style={{ cursor: "pointer", color: "blue" }}
-                onClick={() => this.setState({ isShowAddAuthorModal: true })}>Not in list? or Add
-              </span>
-            </Form.Group>
+            <Row>
+              <Col>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  <Form.Label>Property Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Product Title"
+                    name="title"
+                    value={this.state.title}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Select Property Type</Form.Label>
+                  <Select
+                    options={this.state.allPropertyTypes}
+                    placeholder="Select Property Type"
+                    isMulti={true}
+                    onChange={this.onChangePropertyType}
+                    value={this.state.selectedPropertyType}
+                  />
+                  <span style={{ cursor: "pointer", color: "blue" }}
+                    onClick={() => this.setState({ isShowAddPropertyTypeModal: true })}>Not in list? or Add
+                  </span>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Select Tenent Type</Form.Label>
+                  <Select
+                    options={this.state.allTenentTypes}
+                    placeholder="Select Tenent Type"
+                    isMulti={true}
+                    onChange={this.onChangeTenentType}
+                    value={this.state.selectedTenentType}
+                  />
+                  <span style={{ cursor: "pointer", color: "blue" }}
+                    onClick={() => this.setState({ isShowAddTenentTypeModal: true })}>Not in list? or Add
+                  </span>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Select Parking Type</Form.Label>
+                  <Select
+                    options={this.state.allParkingTypes}
+                    placeholder="Select Parking Type"
+                    isMulti={true}
+                    onChange={this.onChangeParkingType}
+                    value={this.state.selectedParkingType}
+                  />
+                  <span style={{ cursor: "pointer", color: "blue" }}
+                    onClick={() => this.setState({ isShowAddParkingTypeModal: true })}>Not in list? or Add
+                  </span>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Select Furnished Type</Form.Label>
+                  <Select
+                    options={this.state.allFurnishedTypes}
+                    placeholder="Select Furnished Type"
+                    isMulti={false}
+                    onChange={this.onChangeFurnishedType}
+                    value={this.state.selectedFurnishedType}
+                  />
+                  <span style={{ cursor: "pointer", color: "blue" }}
+                    onClick={() => this.setState({ isShowAddFurnishedTypeModal: true })}>Not in list? or Add new author
+                  </span>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Select Property Structure Type</Form.Label>
+                  <Select
+                    options={this.state.allPropertyStructureTypes}
+                    placeholder="Select Property Structure Type"
+                    isMulti={false}
+                    onChange={this.onChangePropertyStructureType}
+                    value={this.state.selectedPropertyStructureType}
+                  />
+                  <span style={{ cursor: "pointer", color: "blue" }}
+                    onClick={() => this.setState({ isShowAddPropertyStructureTypeModal: true })}>Not in list? or Add
+                  </span>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  <Form.Label> Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Enter Description"
+                    name="describe"
+                    value={this.state.describe}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  <Form.Label> Quantity</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Quantity"
+                    name="qty"
+                    value={this.state.qty}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  <Form.Label> Price</Form.Label>
+                  <Form.Control
+                    type="Float"
+                    placeholder="Enter Price"
+                    name="price"
+                    value={this.state.price}
+                    onChange={this.handleChange}
+                  />
+                  <Form.Group className="mb-2" controlId="formBasicEmail">
+                    <Form.Label>No. of pages</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter No. of Pages"
+                      name="pages"
+                      value={this.state.pages}
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                </Form.Group>
+                <Form.Group controlId="formFile" className="mb-3">
+                  <Form.Label>Product Image</Form.Label>
+                  <Form.Control type="file" onChange={this.onChangeImage} />
+                </Form.Group>
+                <span style={{ color: 'red' }}>*Upload Imgage within 2MB size</span>
+                {(this.state.p_image !== null && this.state.p_image !== undefined) && (
+                  <div>
+                    <img
+                      src={this.state.p_image}
+                      alt="image"
+                      style={{ width: '50px', height: '50px' }}
+                    />
+                  </div>
+                )}
+              </Col>
+              <Row>
+                <Col>
+                  <Link to="/owner">
+                    {' '}
+                    <button
+                      className="innerbutton"
+                      type="submit"
+                      value="Submit"
+                      onClick={this.submitForm}
+                    >
+                      Add Product
+                    </button>
+                  </Link>
+                  <br />
+                  <span>
+                    {this.state.error.titleerr}
+                    {this.state.error.describeerr}
+                    {this.state.error.sizeerr}
+                    {this.state.error.branderr}
+                    <br />
+                    {this.state.error.imageerr}
+                    {this.state.error.priceerr}
+                  </span>
+                </Col>
+              </Row>
 
-            <Form.Group className="mb-2" controlId="formBasicEmail">
-              <Form.Label> Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                placeholder="Enter Description"
-                name="describe"
-                value={this.state.describe}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicEmail">
-              <Form.Label> Quantity</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter Quantity"
-                name="qty"
-                value={this.state.qty}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicEmail">
-              <Form.Label> Price</Form.Label>
-              <Form.Control
-                type="Float"
-                placeholder="Enter Price"
-                name="price"
-                value={this.state.price}
-                onChange={this.handleChange}
-              />
-              <Form.Group className="mb-2" controlId="formBasicEmail">
-                <Form.Label>No. of pages</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter No. of Pages"
-                  name="pages"
-                  value={this.state.pages}
-                  onChange={this.handleChange}
-                />
-              </Form.Group>
-            </Form.Group>
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Product Image</Form.Label>
-              <Form.Control type="file" onChange={this.onChangeImage} />
-            </Form.Group>
-            <span style={{ color: 'red' }}>*Upload Imgage within 2MB size</span>
-            {(this.state.p_image !== null && this.state.p_image !== undefined) && (
-              <div>
-                <img
-                  src={this.state.p_image}
-                  alt="image"
-                  style={{ width: '50px', height: '50px' }}
-                />
-              </div>
-            )}
-            <Link to="/owner">
-              {' '}
-              <button
-                className="innerbutton"
-                type="submit"
-                value="Submit"
-                onClick={this.submitForm}
-              >
-                Add Product
-              </button>
-            </Link>
-            <br />
-            <span>
-              {this.state.error.titleerr}
-              {this.state.error.describeerr}
-              {this.state.error.sizeerr}
-              {this.state.error.branderr}
-              <br />
-              {this.state.error.imageerr}
-              {this.state.error.priceerr}
-            </span>
+            </Row>
           </div>
         }
       </div>

@@ -4,8 +4,8 @@ import { Form, Modal, Button } from 'react-bootstrap'
 function ModalForAddProperty(props) {
     return (
         <Modal
-            show={this.state.isShowAddPublisherModal}
-            onHide={() => this.setState({ isShowAddPublisherModal: false })}
+            show={props.show}
+            onHide={props.onClose}
             // size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
@@ -30,7 +30,7 @@ function ModalForAddProperty(props) {
             <Modal.Footer>
                 <Button onClick={props.onClose}>Close</Button>
                 <Button variant="success"
-                    disabled={props.inputValue === ''} onClick={this.onClickAdd}>Add</Button>
+                    disabled={props.inputValue === ''} onClick={props.onClickAdd}>Add</Button>
             </Modal.Footer>
         </Modal>
     )

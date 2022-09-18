@@ -6,13 +6,15 @@ import com.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-//controller -> service -> repos -> db
-
 @Service
+@Transactional
 public class PropertyService {
 	@Autowired
 	PropertyRepository propertyRepository;
@@ -26,9 +28,13 @@ public class PropertyService {
 	public List<Property> getAllProperties() {
 		return propertyRepository.findAll();
 	}
-	public Property getProperty(int p_id)
+	public Property getPropertyById(int pId)
 	{
-		return propertyRepository.getById(p_id);
+		Property property = propertyRepository.getById(pId);
+		property.getCategories();
+		property.getIntrestedUser();
+		property.getOwner();
+		return property;
 	}
 
 	public Property save(Property p) {
@@ -52,17 +58,30 @@ public class PropertyService {
 		return propertyRepository.findByCityEqualsIgnoreCase(city);
 	}
 
-	public List<Property> getByVid(int v_id) {
-		return propertyRepository.getByVid(v_id);
+
+	public List<Property> getIntrestingPropertiesByUser(Integer userId) {
+		return propertyRepository.getPropertiesByIntrestedUser(userId);
+	}
+
+	public List<Property> getByOwnerid(int ownerId) {
+		return propertyRepository.getByOwnerid(ownerId);
 	}
 
 	public int addProperty(com.models.Property property) throws Exception {
 		try{
 			Property propertyEntity = new Property();
-			propertyEntity.setPname(property.getPname());
+			propertyEntity.setName(property.getName());
 			propertyEntity.setImageUrl(property.getImageUrl());
-			propertyEntity.setPdesc(property.getPdesc());
+			propertyEntity.setDescription(property.getDesc());
 			propertyEntity.setRent(property.getRent());
+			propertyEntity.setDescription(property.getDesc());
+			propertyEntity.setAddress(property.getAddress());
+			propertyEntity.setArea(property.getArea());
+			propertyEntity.setAvailable(true);
+			property.setDeposite(property.getDeposite());
+			propertyEntity.setCity(property.getCity());
+			propertyEntity.setTimestamp(Timestamp.from(Instant.now()));
+			property.setNoOfBalconies(property.getNoOfBalconies());
 			Set<Category> categories = property.getCategoryIds()
 							.stream().map(e-> categoryservice.getCategoryById(e)).collect(Collectors.toSet());
 			propertyEntity.setCategories(categories);

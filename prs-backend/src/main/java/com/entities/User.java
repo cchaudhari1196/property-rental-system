@@ -19,9 +19,6 @@ public class User {
 	private String password;
 
 
-	@ManyToMany(mappedBy = "intrestedUser", cascade = { CascadeType.ALL })
-	private Set<Property> properties;
-	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -101,11 +98,4 @@ public class User {
 		this.lname = u_lname;
 	}
 
-	public Set<Property> getProperties() {
-		return properties;
-	}
-
-	public void setProperties(Set<Property> properties) {
-		this.properties = properties;
-	}
 }

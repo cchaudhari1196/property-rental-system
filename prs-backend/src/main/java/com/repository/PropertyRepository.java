@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
 
 	@Query(value = "select p from Property p join p.categories c where c.name=?1")
@@ -23,12 +22,15 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 	public List<Property> searchbykeyword(String pname, String pdesc);
 
 	@Query(value = "select * from property where owner_id =?1", nativeQuery = true)
-	public List<Property> getByVid(int ownerId);
+	public List<Property> getByOwnerid(int ownerId);
 
 	@Modifying
 	@Query(value = "delete from property where id=?1", nativeQuery = true)
 	public void productdel(int p_id);
 
 	public List<Property> findByCityEqualsIgnoreCase(String city);
+
+	@Query(value = "select p from Property p join p.intrestedUser u where u.id=?1")
+	public List<Property> getPropertiesByIntrestedUser(Integer user_id);
 
 }

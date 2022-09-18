@@ -4,7 +4,10 @@ import com.entities.Property;
 import com.service.FilesStorageService;
 import com.service.PropertyService;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,16 +23,16 @@ public class PropertyController {
 	@Autowired
 	FilesStorageService storageService;
 
-	/* TODO - In other get mapping I tried integrating this method. We need to test*/
-	@GetMapping("/all")
-	public List<Property> getAllProperties() {
-		return propertyService.getAllProperties();
+	@GetMapping("/{id}")
+	public ResponseEntity<Property> getById(@PathVariable("id") int id){
+		Property property = propertyService.getPropertyById(id);
+//		if(property instanceof HibernateProxy){
+//			return (Property) ((HibernateProxy) property).getHibernateLazyInitializer().getImplementation();
+//		}
+		return ResponseEntity.ok(property);
 	}
 
-	@PostMapping("/searchbykeyword")
-	public List<Property> searchbykeyword(@RequestBody Property p) {
-		return propertyService.searchbykeyword(p.getPname(), p.getPdesc());
-	}
+	/*Here if we dont pass any value all data will be returned*/
 	@GetMapping()
 	public List<Property> getByCatrgory(@RequestParam(name="category", required = false) String category,
 										@RequestParam(name = "categoryId", required = false) Integer categoryId,
@@ -50,16 +53,23 @@ public class PropertyController {
 	}
 
 
+
+	@PostMapping("/searchbykeyword")
+	public List<Property> searchbykeyword(@RequestBody Property p) {
+		return propertyService.searchbykeyword(p.getName(), p.getDescription());
+	}
+
+
 	@GetMapping("/search/{data}")
 	public List<Property> searchRaw(@PathVariable("data") String data) {
 		return propertyService.getAllProperties().stream().filter((e) -> {
-			return StringUtils.containsIgnoreCase(e.getPname(),data);
+			return StringUtils.containsIgnoreCase(e.getName(),data);
 		}).collect(Collectors.toList());
 	}
 
 	@GetMapping("/by_owner")
 	public List<Property> getByVid(@RequestParam("id")int id){
-		return propertyService.getByVid(id);
+		return propertyService.getByOwnerid(id);
 	}
 
 

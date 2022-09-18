@@ -1,6 +1,7 @@
 package com.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 import javax.persistence.*;
@@ -15,10 +16,10 @@ public class Property {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String pname;
+	private String name;
 
 	@Column(columnDefinition = "TEXT")
-	private String pdesc;
+	private String description;
 
 	private float rent;
 
@@ -79,20 +80,20 @@ public class Property {
 		this.id = id;
 	}
 
-	public String getPname() {
-		return pname;
+	public String getName() {
+		return name;
 	}
 
-	public void setPname(String pname) {
-		this.pname = pname;
+	public void setName(String pname) {
+		this.name = pname;
 	}
 
-	public String getPdesc() {
-		return pdesc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setPdesc(String pdesc) {
-		this.pdesc = pdesc;
+	public void setDescription(String pdesc) {
+		this.description = pdesc;
 	}
 
 

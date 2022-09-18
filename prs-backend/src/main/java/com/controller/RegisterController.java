@@ -50,7 +50,7 @@ public class RegisterController {
     @PostMapping("/parking_type")
     public ResponseEntity<Category> registerparkingType(@RequestBody Category category)
     {
-        category.setCategoryType(RegistrationService.TENENT_TYPE);
+        category.setCategoryType(RegistrationService.PARKING_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
     }
@@ -58,7 +58,7 @@ public class RegisterController {
     @GetMapping("/parking_type")
     public ResponseEntity<List<Category>> getparkingType()
     {
-        return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.TENENT_TYPE));
+        return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.PARKING_TYPE));
     }
 
     /*BHKs*/
@@ -79,7 +79,7 @@ public class RegisterController {
     @PostMapping("/property_type")
     public ResponseEntity<Category> registerpropertyType(@RequestBody Category category)
     {
-        category.setCategoryType(RegistrationService.PROPERTY_STRUCTURE_TYPE);
+        category.setCategoryType(RegistrationService.PROPERTY_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
     }
@@ -87,6 +87,6 @@ public class RegisterController {
     @GetMapping("/property_type")
     public ResponseEntity<List<Category>> getpropertyType()
     {
-        return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.PROPERTY_STRUCTURE_TYPE));
+        return ResponseEntity.ok(registrationService.getCategoryByType(RegistrationService.PROPERTY_TYPE));
     }
 }

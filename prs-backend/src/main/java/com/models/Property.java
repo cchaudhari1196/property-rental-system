@@ -9,8 +9,8 @@ public class Property {
     private Integer deposite;
     private String imageUrl;
     private Integer ownerId;
-    private String pname;
-    private String pdesc;
+    private String name;
+    private String desc;
     private String address;
     private String city;
     private String area;
@@ -66,20 +66,20 @@ public class Property {
         this.ownerId = ownerId;
     }
 
-    public String getPname() {
-        return pname;
+    public String getName() {
+        return name;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPdesc() {
-        return pdesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setPdesc(String pdesc) {
-        this.pdesc = pdesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getAddress() {

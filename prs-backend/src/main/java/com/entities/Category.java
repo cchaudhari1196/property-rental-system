@@ -15,9 +15,6 @@ public class Category {
 
 	private String categoryType;
 
-	@ManyToMany(mappedBy = "categories", cascade = { CascadeType.ALL })
-	private Set<Property> properties;
-
 	public Category() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -55,12 +52,5 @@ public class Category {
 		this.categoryType = c_categoryType;
 	}
 
-	public Set<Property> getProperties() {
-		return properties;
-	}
-
-	public void setProperties(Set<Property> properties) {
-		this.properties = properties;
-	}
 }
 

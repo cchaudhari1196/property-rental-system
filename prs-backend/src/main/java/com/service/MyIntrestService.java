@@ -16,9 +16,12 @@ public class MyIntrestService {
 	@Autowired
 	UserService userService;
 
-	public Set<Property> findIntrestedProperties(int uId){
-		User user = userService.getUserById(uId);
-		Set<Property> properties = user.getProperties();
+
+	@Autowired
+	PropertyService propertyService;
+
+	public List<Property> findIntrestedProperties(int uId){
+		List<Property> properties = propertyService.getIntrestingPropertiesByUser(uId);
 		return properties;
 	}
 

@@ -132,7 +132,7 @@ export default class Register extends React.Component {
             })
         };
 
-        await fetch(process.env.REACT_APP_BASE_URL+"/user/adduser", reqData)
+        await fetch(process.env.REACT_APP_BASE_URL+"/user", reqData)
             .then(resp => resp.json())
             .then(data => this.setState({ st: data, success: true }));
         window.location.href = "/";

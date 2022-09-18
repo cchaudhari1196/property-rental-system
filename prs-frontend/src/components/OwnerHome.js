@@ -52,17 +52,16 @@ export default class OwnerHome extends React.Component {
                                 <Table striped bordered hover style={{ textAlign: 'center' }}>
                                     <thead>
                                         <tr style={{ backgroundColor: "#6e1230", color: "white" }}>
-                                            <th>Product ID</th>
-                                            <th>Product Title</th>
-                                            <th>Product Description</th>
-                                            <th>Product Price</th>
-                                            <th>Product Quantity</th>
-                                            <th>No of page</th>
-                                            <th>Language</th>
-                                            <th>Publisher</th>
+                                            <th>Property ID</th>
+                                            <th>Property Title</th>
+                                            <th>Property Description</th>
+                                            <th>Deposite</th>
+                                            <th>Rent</th>
+                                            <th>No Of Balconies</th>
+                                            <th>Address</th>
+                                            <th>City</th>
                                             <th>Categories</th>
-                                            <th>Authors</th>
-                                            <th>Product Rating</th>
+                                            <th>Intrested User</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,32 +69,24 @@ export default class OwnerHome extends React.Component {
                                             this.state.to.map(
                                                 (o) => {
                                                     return (
-                                                        <tr key={o.p_id}>
-                                                            <td>{o.p_id}</td>
-                                                            <td>{o.pname}</td>
-                                                            <td>{o.pdesc.substring(0,100)}... <a style={{color:"blue", cursor:"pointer"}} onClick={(e)=>this.handleShowMoreLink(o.pdesc)}>Show More</a></td>
-                                                            <td>₹ {o.pprice}</td>
-                                                            <td>{o.pqty}</td>
-                                                            <td>{o.noOfPages}</td>
-                                                            <td>{o.language?.language}</td>
-                                                            <td>{o?.publisher?.p_name}</td>
+                                                        <tr key={o.id}>
+                                                            <td>{o.id}</td>
+                                                            <td>{o.name}</td>
+                                                            <td>{o.description.substring(0,100)}... <a style={{color:"blue", cursor:"pointer"}} onClick={(e)=>this.handleShowMoreLink(o.pdesc)}>Show More</a></td>
+                                                            <td>₹ {o.price}</td>
+                                                            <td>{o.rent}</td>
+                                                            <td>{o.noOfBalconies}</td>
+                                                            <td>{o.address}</td>
+                                                            <td>{o?.city}</td>
                                                             <td>
                                                                 {o?.categories.map(cat => (
-                                                                    <div key={cat.id}>{cat.c_name}</div>
+                                                                    <div key={cat.id}>{cat.name}</div>
                                                                 ))}
                                                             </td>
                                                             <td>
-                                                                {o?.authors.map(author => (
-                                                                    <div key={author.id}>{author.name}</div>
+                                                                {o?.intrestedUser.map(intrestedUsers => (
+                                                                    <div key={intrestedUsers.id}>{intrestedUsers.name} - {intrestedUsers.phone}</div>
                                                                 ))}
-                                                            </td>
-                                                            <td>
-                                                                <Rating
-                                                                    ratingValue={o.prating}
-                                                                    allowHalfIcon={true}
-                                                                    allowHover={false}
-                                                                    readonly={true}
-                                                                />
                                                             </td>
                                                         </tr>
                                                     );

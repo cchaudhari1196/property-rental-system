@@ -35,6 +35,7 @@ export default class AddProperty extends React.Component {
       newFurnishedType: '',
       newTenentType: '',
       newParkingType: '',
+      valueFromModal:'',
       error: {
         titleerr: '',
         describeerr: '',
@@ -240,10 +241,10 @@ export default class AddProperty extends React.Component {
       }).catch((err) => { })
     }).catch((err) => { })
   }
-  onClickAdd = (endpoint, modal, allValueState, selectedValueState) => {
+  onClickAdd = (endpoint, modal, allValueState, selectedValueState, inputValue) => {
     this.setState({ [modal]: false })
     let data = {
-      p_name: this.state.newPropertyType
+      name: inputValue
     }
     axios.post(process.env.REACT_APP_BASE_URL + '/register/' + endpoint, data).then((res) => {
       console.log(res)
@@ -280,7 +281,7 @@ export default class AddProperty extends React.Component {
           inputValue={this.state.newPropertyType}
           setValue={(value) => this.setState({ newPropertyType: value })}
           label={"Property Type "}
-          onClickAdd={() => this.onClickAdd("property_type", "isShowAddPropertyTypeModal", "allPropertyTypes", "selectedPropertyType")}
+          onClickAdd={() => this.onClickAdd("property_type", "isShowAddPropertyTypeModal", "allPropertyTypes", "selectedPropertyType", this.state.newPropertyType)}
           onClose={() => this.setState({ isShowAddPropertyTypeModal: false })}
         />
         <ModalForAddProperty
@@ -288,7 +289,7 @@ export default class AddProperty extends React.Component {
           inputValue={this.state.newPropertyStructureType}
           setValue={(value) => this.setState({ newPropertyStructureType: value })}
           label={"Property Structure Type"}
-          onClickAdd={() => this.onClickAdd("property_structure_type", "isShowAddPropertyStructureTypeModal", "allPropertyStructureTypes", "selectedPropertyStructureType")}
+          onClickAdd={() => this.onClickAdd("property_structure_type", "isShowAddPropertyStructureTypeModal", "allPropertyStructureTypes", "selectedPropertyStructureType",  this.state.newPropertyStructureType)}
           onClose={() => this.setState({ isShowAddPropertyStructureTypeModal: false })}
         />
         <ModalForAddProperty
@@ -296,7 +297,7 @@ export default class AddProperty extends React.Component {
           inputValue={this.state.newFurnishedType}
           setValue={(value) => this.setState({ newFurnishedType: value })}
           label={"Furnished Type"}
-          onClickAdd={() => this.onClickAdd("furnished_type", "isShowAddFurnishedTypeModal", "allFurnishedTypes", "selectedFurnishedType")}
+          onClickAdd={() => this.onClickAdd("furnished_type", "isShowAddFurnishedTypeModal", "allFurnishedTypes", "selectedFurnishedType", this.state.newFurnishedType)}
           onClose={() => this.setState({ isShowAddFurnishedTypeModal: false })}
         />
         <ModalForAddProperty
@@ -304,7 +305,7 @@ export default class AddProperty extends React.Component {
           inputValue={this.state.newTenentType}
           setValue={(value) => this.setState({ newTenentType: value })}
           label={"Tenent Type "}
-          onClickAdd={() => this.onClickAdd("tenent_type", "isShowAddTenentTypeModal", "allTenentTypes", "selectedTenentType")}
+          onClickAdd={() => this.onClickAdd("tenent_type", "isShowAddTenentTypeModal", "allTenentTypes", "selectedTenentType", this.state.newTenentType)}
           onClose={() => this.setState({ isShowAddTenentTypeModal: false })}
         />
         <ModalForAddProperty
@@ -312,7 +313,7 @@ export default class AddProperty extends React.Component {
           inputValue={this.state.newParkingType}
           setValue={(value) => this.setState({ newParkingType: value })}
           label={"Parking Type "}
-          onClickAdd={() => this.onClickAdd("parking_type", "isShowAddParkingTypeModal", "allParkingTypes", "selectedParkingType")}
+          onClickAdd={() => this.onClickAdd("parking_type", "isShowAddParkingTypeModal", "allParkingTypes", "selectedParkingType", this.state.newParkingType)}
           onClose={() => this.setState({ isShowAddParkingTypeModal: false })}
         />
         {this.state.isLoading ? <Loader /> :

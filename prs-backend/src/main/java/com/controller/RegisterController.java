@@ -20,6 +20,9 @@ public class RegisterController {
     @PostMapping("/furnished_type")
     public ResponseEntity<Category> registerAuthor(@RequestBody Category category)
     {
+        if(category == null || category.getName() == null){
+            return ResponseEntity.badRequest().body(null);
+        }
         category.setCategoryType(RegistrationService.FURNISHED_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
@@ -36,6 +39,9 @@ public class RegisterController {
     @PostMapping("/tenent_type")
     public ResponseEntity<Category> registerTenent(@RequestBody Category category)
     {
+        if(category == null || category.getName() == null){
+            return ResponseEntity.badRequest().body(null);
+        }
         category.setCategoryType(RegistrationService.TENENT_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
@@ -50,6 +56,9 @@ public class RegisterController {
     @PostMapping("/parking_type")
     public ResponseEntity<Category> registerparkingType(@RequestBody Category category)
     {
+        if(category == null || category.getName() == null){
+            return ResponseEntity.badRequest().body(null);
+        }
         category.setCategoryType(RegistrationService.PARKING_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
@@ -65,6 +74,9 @@ public class RegisterController {
     @PostMapping("/property_structure_type")
     public ResponseEntity<Category> registerpropertyStructureType(@RequestBody Category category)
     {
+        if(category == null || category.getName() == null){
+            return ResponseEntity.badRequest().body(null);
+        }
         category.setCategoryType(RegistrationService.PROPERTY_STRUCTURE_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);
@@ -79,6 +91,9 @@ public class RegisterController {
     @PostMapping("/property_type")
     public ResponseEntity<Category> registerpropertyType(@RequestBody Category category)
     {
+        if(category == null || category.getName() == null){
+            return ResponseEntity.badRequest().body(null);
+        }
         category.setCategoryType(RegistrationService.PROPERTY_TYPE);
         registrationService.registerCategory(category);
         return ResponseEntity.ok(category);

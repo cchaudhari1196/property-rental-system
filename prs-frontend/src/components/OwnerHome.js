@@ -52,12 +52,12 @@ export default class OwnerHome extends React.Component {
                                 <Table striped bordered hover style={{ textAlign: 'center' }}>
                                     <thead>
                                         <tr style={{ backgroundColor: "#6e1230", color: "white" }}>
-                                            <th>Property ID</th>
+                                            <th>Id</th>
                                             <th>Property Title</th>
                                             <th>Property Description</th>
                                             <th>Deposite</th>
                                             <th>Rent</th>
-                                            <th>No Of Balconies</th>
+                                            <th>No of Balconies</th>
                                             <th>Address</th>
                                             <th>City</th>
                                             <th>Categories</th>
@@ -72,9 +72,9 @@ export default class OwnerHome extends React.Component {
                                                         <tr key={o.id}>
                                                             <td>{o.id}</td>
                                                             <td>{o.name}</td>
-                                                            <td>{o.description.substring(0,100)}... <a style={{color:"blue", cursor:"pointer"}} onClick={(e)=>this.handleShowMoreLink(o.pdesc)}>Show More</a></td>
-                                                            <td>₹ {o.price}</td>
-                                                            <td>{o.rent}</td>
+                                                            <td>{o.description.substring(0,100)}... <a style={{color:"blue", cursor:"pointer"}} onClick={(e)=>this.handleShowMoreLink(o.description)}>Show More</a></td>
+                                                            <td>₹{o.price}</td>
+                                                            <td>₹{o.rent}</td>
                                                             <td>{o.noOfBalconies}</td>
                                                             <td>{o.address}</td>
                                                             <td>{o?.city}</td>
@@ -96,7 +96,7 @@ export default class OwnerHome extends React.Component {
                                     </tbody>
                                 </Table>
                             </div>
-                            <div className=''><b>Total Number Of Products:<br />{this.state.to.length}</b></div>
+                            <div className=''><b>Total Number Of Properties:<br />{this.state.to.length}</b></div>
                         </div>
                         : < div style={{ textAlign: "center", color: "black" }}><h2>No Data</h2></div>
                     }

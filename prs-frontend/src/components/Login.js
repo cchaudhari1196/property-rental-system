@@ -147,7 +147,7 @@ function LoginIn() {
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="By signing in you will agree all the terms & condition by Bookly" onChange={() => setIsCheckTerms(!isCheckTerms)} />
+                        <Form.Check type="checkbox" label="By signing in you will agree all the terms & condition by Property Rental System" onChange={() => setIsCheckTerms(!isCheckTerms)} />
                     </Form.Group>
                     {isError &&
                         <Form.Text style={{ color: 'red' }}>

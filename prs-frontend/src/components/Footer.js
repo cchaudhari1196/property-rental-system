@@ -45,7 +45,7 @@ function Footer(props) {
                     <SocialIcon url="" network="pinterest" style={{ marginRight: "8px" }} />
                     <SocialIcon url="" network="linkedin" />
                 </div>
-                @2022 Bookly<br></br>
+                @2022 Property Rental System<br></br>
             </div>
         </div>
     )

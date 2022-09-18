@@ -169,14 +169,14 @@ class OwnerLogin extends React.Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type='password' name="vpassword" value={this.state.vpassword} onChange={this.handleChange} />
                     </Form.Group>
-                    <p>By signing in you will agree all the terms & condition by Bookly</p>
+                    <p>By signing in you will agree all the terms & condition by Property Rental System</p>
                     <button type="submit" disabled={!this.state.isFormValid} className={this.state.isFormValid ? 'innerbutton' : "inactivebtn"} onClick={this.signIn}>Sign In</button><br />
                     {this.state.isError &&
                         <Form.Text style={{ color: 'red' }}>
                             Incorrect Email and Password
                         </Form.Text>
                     }
-                    <Link to="/owneregister" ><button className='innerbutton'> Create your Owner's Bookly Account</button></Link>
+                    <Link to="/owneregister" ><button className='innerbutton'> Create your Owner's Property Rental System Account</button></Link>
                     <Form.Group className="mb-2" controlId="formBasicEmail">
                         <Link to="/" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
                     </Form.Group>

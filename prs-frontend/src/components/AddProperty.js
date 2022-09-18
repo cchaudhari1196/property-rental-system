@@ -14,12 +14,12 @@ export default class AddProperty extends React.Component {
       cid: '',
       title: '',
       describe: '',
-      size: '',
-      brand: '',
-      qty: '',
-      pages: '',
-      price: '',
-      rating: '',
+      rent: '',
+      deposite: '',
+      address: '',
+      balconieserr: '',
+      city: '',
+      area: '',
       cat: [],
       selectedOption: '',
       selectedOption1: '',
@@ -35,15 +35,17 @@ export default class AddProperty extends React.Component {
       newFurnishedType: '',
       newTenentType: '',
       newParkingType: '',
-      valueFromModal:'',
+      valueFromModal: '',
       error: {
         titleerr: '',
         describeerr: '',
-        sizeerr: '',
-        branderr: '',
-        qtyerr: '',
-        priceerr: '',
         ratingerr: '',
+        depositeerr: '',
+        renterr: '',
+        addresserr: '',
+        cityerr: '',
+        areaerr: '',
+        balconieserr: '',
       },
       allPropertyTypes: [],
       allFurnishedTypes: [],
@@ -83,44 +85,57 @@ export default class AddProperty extends React.Component {
           error.describeerr = ''
         }
       } else {
-        if (nm === 'size') {
+        if (nm === 'deposite') {
           val = input.value
-          if (val.length > 5) {
-            error.sizeerr = 'Too Large Size'
+          if (val.length < 1) {
+            error.depositeerr = 'Invalid deposite'
           } else {
-            error.sizeerr = ''
+            error.depositeerr = ''
           }
         } else {
-          if (nm === 'pages') {
+          if (nm === 'rent') {
             val = input.value
-            if (val.length < 2) {
-              error.branderr = 'Invalid No of Pages'
+            if (val.length < 1) {
+              error.renterr = 'Invalid Rent'
             } else {
-              error.branderr = ''
+              error.renterr = ''
             }
-          } else {
-            if (nm === 'qty') {
+          }
+          else {
+            if (nm === 'address') {
               val = input.value
               if (val.length < 1) {
-                error.qtyerr = 'Invalid qty'
+                error.addresserr = 'Invalid address'
               } else {
-                error.qtyerr = ''
+                error.addresserr = ''
               }
-            } else {
-              if (nm === 'price') {
+            }
+            else {
+              if (nm === 'city') {
                 val = input.value
                 if (val.length < 1) {
-                  error.priceerr = 'Invalid price'
+                  error.cityerr = 'Invalid city'
                 } else {
-                  error.priceerr = ''
+                  error.cityerr = ''
                 }
-              } else {
-                if (nm === 'rating') {
+              }
+              else {
+                if (nm === 'area') {
                   val = input.value
-                  if (val > 5) {
-                    error.ratingerr = 'Rating should not exceed 5'
+                  if (val.length < 1) {
+                    error.areaerr = 'Invalid area'
                   } else {
-                    error.ratingerr = ''
+                    error.areaerr = ''
+                  }
+                }
+                else {
+                  if (nm === 'balconies') {
+                    val = input.value
+                    if (val.length < 1) {
+                      error.balconieserr = 'Invalid area'
+                    } else {
+                      error.balconieserr = ''
+                    }
                   }
                 }
               }
@@ -128,6 +143,7 @@ export default class AddProperty extends React.Component {
           }
         }
       }
+
     }
     this.setState({ error, [nm]: val })
   }
@@ -187,19 +203,20 @@ export default class AddProperty extends React.Component {
     e.preventDefault()
     let sign = JSON.parse(localStorage.getItem('data1'))
     let data = {
-      'pname': this.state.title,
-      'pdesc': this.state.describe,
-      'language': this.state.selectedLanguage.value,
-      'pprice': Number(this.state.price),
-      'pqty': this.state.qty,
-      'imageUrl': this.state.p_image,
-      'vId': sign.id,
-      'noOfPages': Number(this.state.pages),
-      'categoryIds': this.state.selectedCategories.map(c => c.value),
-      'authorIds': this.state.selectedAuthors.map(a => a.value),
-      'publisherId': this.state.selectedPublishers.value,
+      "categoryIds": [this.state.allFurnishedTypes.value,...this.state.selectedPropertyType.map(v=>v.value),...this.state.selectedTenentType.map(v=>v.value),...this.state.selectedParkingType.map(v=>v.value),this.state.selectedPropertyStructureType.value],
+      "rent": this.state.rent,
+      "deposite": this.state.deposite,
+      "imageUrl": this.state.p_image,
+      "ownerId": sign.id,
+      "name":this.state.title,
+      "desc": this.state.describe,
+      "address": this.state.address,
+      "city": this.state.city,
+      "area": this.state.area,
+      "noOfBalconies": this.state.noOfBalconies,
+      "isAvailable": true
     }
-    await axios.post(process.env.REACT_APP_BASE_URL + '/product', data)
+    await axios.post(process.env.REACT_APP_BASE_URL + '/property', data)
       .then((resp) => {
         window.location.href = '/owner'
         resp.json()
@@ -272,7 +289,7 @@ export default class AddProperty extends React.Component {
     this.setState({ selectedTenentType: selectedOption })
   }
   render() {
-    console.log(this.state.p_image)
+    // console.log(this.state.allPropertyTypes)
     return (
       <div className="register">
         {/* add new property type */}
@@ -289,7 +306,7 @@ export default class AddProperty extends React.Component {
           inputValue={this.state.newPropertyStructureType}
           setValue={(value) => this.setState({ newPropertyStructureType: value })}
           label={"Property Structure Type"}
-          onClickAdd={() => this.onClickAdd("property_structure_type", "isShowAddPropertyStructureTypeModal", "allPropertyStructureTypes", "selectedPropertyStructureType",  this.state.newPropertyStructureType)}
+          onClickAdd={() => this.onClickAdd("property_structure_type", "isShowAddPropertyStructureTypeModal", "allPropertyStructureTypes", "selectedPropertyStructureType", this.state.newPropertyStructureType)}
           onClose={() => this.setState({ isShowAddPropertyStructureTypeModal: false })}
         />
         <ModalForAddProperty
@@ -408,34 +425,64 @@ export default class AddProperty extends React.Component {
                   />
                 </Form.Group>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
-                  <Form.Label> Quantity</Form.Label>
+                  <Form.Label> Rent</Form.Label>
                   <Form.Control
                     type="number"
-                    placeholder="Enter Quantity"
-                    name="qty"
-                    value={this.state.qty}
+                    placeholder="Enter Rent"
+                    name="rent"
+                    value={this.state.rent}
                     onChange={this.handleChange}
                   />
                 </Form.Group>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
-                  <Form.Label> Price</Form.Label>
+                  <Form.Label> Deposite</Form.Label>
                   <Form.Control
-                    type="Float"
-                    placeholder="Enter Price"
-                    name="price"
-                    value={this.state.price}
+                    type="number"
+                    placeholder="Enter Deposite"
+                    name="deposite"
+                    value={this.state.deposite}
                     onChange={this.handleChange}
                   />
-                  <Form.Group className="mb-2" controlId="formBasicEmail">
-                    <Form.Label>No. of pages</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter No. of Pages"
-                      name="pages"
-                      value={this.state.pages}
-                      onChange={this.handleChange}
-                    />
-                  </Form.Group>
+                </Form.Group>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  <Form.Label> Address</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Enter address"
+                    name="address"
+                    value={this.state.address}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  <Form.Label> City</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter city"
+                    name="city"
+                    value={this.state.city}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  <Form.Label> Area(sq.ft.)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter area"
+                    name="area"
+                    value={this.state.area}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  <Form.Label> No. of Balconies</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter No. of Balconies"
+                    name="balconies"
+                    value={this.state.balconies}
+                    onChange={this.handleChange}
+                  />
                 </Form.Group>
                 <Form.Group controlId="formFile" className="mb-3">
                   <Form.Label>Product Image</Form.Label>
@@ -453,7 +500,7 @@ export default class AddProperty extends React.Component {
                 )}
               </Col>
               <Row>
-                <Col>
+                <Col style={{display:"flex",justifyContent: 'center'}}>
                   <Link to="/owner">
                     {' '}
                     <button
@@ -462,18 +509,20 @@ export default class AddProperty extends React.Component {
                       value="Submit"
                       onClick={this.submitForm}
                     >
-                      Add Product
+                      Add Property
                     </button>
                   </Link>
                   <br />
                   <span>
                     {this.state.error.titleerr}
                     {this.state.error.describeerr}
-                    {this.state.error.sizeerr}
-                    {this.state.error.branderr}
-                    <br />
-                    {this.state.error.imageerr}
-                    {this.state.error.priceerr}
+                    {this.state.error.ratingerr}
+                    {this.state.error.depositeerr}
+                    {this.state.error.renterr}
+                    {this.state.error.addresserr}
+                    {this.state.error.cityerr}
+                    {this.state.error.areaerr}
+                    {this.state.error.balconieserr}
                   </span>
                 </Col>
               </Row>

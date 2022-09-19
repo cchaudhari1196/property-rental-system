@@ -24,7 +24,7 @@ export default class ViewCustomer extends React.Component {
                         <div className=''>
                             <Table striped bordered hover  style={{textAlign: 'center'}}>
                                 <thead>
-                                    <tr style={{ backgroundColor: "#6e1230", color: "white" }}>
+                                    <tr style={{ backgroundColor: "#6474E5", color: "white" }}>
                                         <th>Customer ID</th>
                                         <th>Customer FirstName</th>
                                         <th>Customer LastName</th>

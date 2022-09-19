@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Form } from "react-bootstrap";
 import Logo from '../assets/img/Logo.png';
 import { useNavigate } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
 
 function LoginIn() {
     const history = useNavigate();
@@ -107,7 +108,7 @@ function LoginIn() {
             .then(data => {
                 if (data) {
                     localStorage.setItem('data1', JSON.stringify(data));
-                    history('/home')
+                    history('/')
                 }
                 else {
                     alert("Wrong ID/Password");
@@ -124,7 +125,9 @@ function LoginIn() {
                 <img className='login_img' src={Logo} alt='logo' />
             </Link>
             <div className='login_container'>
-                <h1>User Sign-in</h1>
+                <h1 style={{alignItems:"center", textAlign: "center"}}>
+                    <span style={{marginRight:"4px"}}><FaUserAlt color={"#6474E5"}/></span>
+                    User Sign-in</h1>
                 <form>
                     {/* <h5>Email</h5>
                     <input type='text' name="email" value={email} onChange={handleChange} />

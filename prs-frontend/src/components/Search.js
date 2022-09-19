@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import '../Home.css'
 import Photo2 from '../Photo2.jpg'
-import Product from './Property.js'
+import Property from './Property.js'
 import Loader from './Loader'
 import Footer from './Footer';
 import { useLocation } from 'react-router-dom'
 import { Container, Row } from 'react-bootstrap'
+import axios from 'axios';
 const Search = (props) => {
   const [sr, setsr] = useState([])
   const [searcherror, setsearcherror] = useState("")
@@ -20,7 +21,7 @@ const Search = (props) => {
     }
     fetch(
       process.env.REACT_APP_BASE_URL +
-      '/product/search/' +
+      '/property/search/' +
       state,
     )
       .then((resp) => resp.json())
@@ -37,30 +38,68 @@ const Search = (props) => {
         }
       })
   }, [state])
+  const onClickInterested = async (id) => {
+    if (JSON.parse(localStorage.getItem('data1')) !== null) {
+      await axios.post(process.env.REACT_APP_BASE_URL + '/property/show_interest?user_id=' + JSON.parse(localStorage.getItem('data1'))?.id + '&property_id=' + id)
+        .then((resp) => {
+          resp.json()
+          let temp = [...this.state.to]
+          temp.filter(i => i.id === id)[0].intrestedUser = [...temp.filter(i => i.id === id)[0].intrestedUser, { id: Number(JSON.parse(localStorage.getItem('data1'))?.id) }]
+          console.log(temp)
+          this.setState({ to: temp })
+        })
+        .then((data) => {
+
+        })
+        .catch((error) => {
+        })
+    } else {
+      window.location.href = '/login'
+    }
+
+  }
+  const onClickNotInterested = async (id) => {
+    await axios.post(process.env.REACT_APP_BASE_URL + '/property/remove_interest?user_id=' + JSON.parse(localStorage.getItem('data1'))?.id + '&property_id=' + id)
+      .then((resp) => {
+        let temp = [...this.state.to]
+        temp.filter(i => i.id === id)[0].intrestedUser = temp.filter(i => i.id === id)[0].intrestedUser.filter(j => j.id !== JSON.parse(localStorage.getItem('data1'))?.id)
+        this.setState({ to: temp })
+        resp.json()
+      })
+      .then((data) => {
+
+      })
+      .catch((error) => {
+      })
+  }
   return loading ? (
     <Loader />
   ) : (
     <div>
       <div className="home">
         <Container className="mt-3">
-          <Row xs={2} md={4} className="g-4 mt-2">
+          <Row className="g-4 mt-2">
             {sr.map((o) => {
               return (
                 <div className="" key={o.p_id}>
-                  <Product
-                    id={o.p_id}
-                    title={o.pname}
-                    price={o.pprice}
+                  <Property
+                    id={o.id}
+                    title={o.name}
+                    rent={o.rent}
+                    deposite={o.deposite}
                     image={Photo2}
-                    describe={o.pdesc}
-                    rating={o.prating}
-                    categories={o.categories}
-                    authors={o.authors}
-                    p_qty={o.pqty}
+                    description={o.description}
+                    intrestedUser={o.intrestedUser}
                     imageUrl={o.imageUrl}
-                    language={o.language}
-                    noOfPages={o.noOfPages}
-                    publisher={o.publisher}
+                    address={o.address}
+                    area={o.area}
+                    available={o.available}
+                    categories={o.categories}
+                    city={o.city}
+                    deposite={o.deposite}
+                    owner={o.owner}
+                    onClickInterested={(id) => onClickInterested(id)}
+                    onClickNotInterested={(id) => onClickNotInterested(id)}
                   />
                 </div>
               )

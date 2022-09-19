@@ -179,7 +179,7 @@ export default class Register extends React.Component {
                         <Link to="register" ><button className='innerbutton' type="submit" onClick={this.submitForm}>Sign Up</button></Link><br />
                     </Form.Group>
                     <Form.Group className="mb-2" controlId="formBasicEmail">
-                        <Link to="/" ><button className='innerbutton'><ArrowBackIcon/>Back</button></Link><br />
+                        <Link to="/login" ><button className='innerbutton'><ArrowBackIcon/>Back</button></Link><br />
                     </Form.Group>
                     <span>{this.state.error.emailerr}{this.state.error.fnameerr}{this.state.error.lnameerr}{this.state.error.addresserr}<br />
                         {this.state.error.pwderr}{this.state.error.contactnoerr}</span>

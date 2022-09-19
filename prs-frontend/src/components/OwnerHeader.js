@@ -43,7 +43,7 @@ function OwnerHeader(props) {
               </div>
             </Link>
           </Nav.Link>
-          <Nav.Link style={{ color: "#6e1230" }} >
+          <Nav.Link style={{ color: "#6474E5" }} >
             <Link to={"/owner"} className="headerLink">Owner
             </Link></Nav.Link>
         </Navbar.Collapse>

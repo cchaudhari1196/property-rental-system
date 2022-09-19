@@ -57,7 +57,7 @@ export default class ViewOutofStock extends React.Component {
                     </table> */}
                                 <Table striped bordered hover style={{ textAlign: 'center' }}>
                                     <thead>
-                                        <tr style={{ backgroundColor: "#6e1230", color: "white" }}>
+                                        <tr style={{ backgroundColor: "#6474E5", color: "white" }}>
                                             <th>Product ID</th>
                                             <th>Product Title</th>
                                             <th>Product Description</th>

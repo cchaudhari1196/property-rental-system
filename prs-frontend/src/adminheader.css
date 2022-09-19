@@ -9,7 +9,7 @@
 }
 .navbar_brand {
     position: relative;
-    background: url(assets/img/Logo.png);
+    /* background: url(assets/img/Logo.png); */
     width: 170px;
     left: 15px;
     background-size: contain;
@@ -50,7 +50,7 @@
     flex-direction:column;
     margin-left:10px;
     margin-right:10px;
-    color:#6e1230;
+    color:#6474E5;
     width: 100px;
    
 }

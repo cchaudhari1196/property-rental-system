@@ -1,7 +1,10 @@
 package com.entities;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Objects;
 
 @Table
 @Entity
@@ -98,4 +101,16 @@ public class User {
 		this.lname = u_lname;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return id == user.id && Objects.equals(fname, user.fname) && Objects.equals(lname, user.lname) && Objects.equals(phone, user.phone) && Objects.equals(address, user.address) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, fname, lname, phone, address, email, password);
+	}
 }

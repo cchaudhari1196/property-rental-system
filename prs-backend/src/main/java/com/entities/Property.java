@@ -1,7 +1,6 @@
 package com.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 import javax.persistence.*;
@@ -63,7 +62,6 @@ public class Property {
 					@JoinColumn(name = "user_id")
 			}
 	)
-	@ReadOnlyProperty
 	private Set<User> intrestedUser = new HashSet<>();
 
 
@@ -171,6 +169,14 @@ public class Property {
 
 	public void setIntrestedUser(Set<User> intrestedUser) {
 		this.intrestedUser = intrestedUser;
+	}
+
+	public void addIntrestedUser(User intrestedUser) {
+		this.intrestedUser.add(intrestedUser);
+	}
+
+	public void removeIntrestedUser(User intrestedUser) {
+		this.intrestedUser.remove(intrestedUser);
 	}
 
 	public String getNoOfBalconies() {

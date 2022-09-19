@@ -21,7 +21,6 @@ public class UserService
 
 	public User getUserById(int id)
 	{
-		// TODO Auto-generated method stub
 		return userrepo.findById(id).get();
 	}
 

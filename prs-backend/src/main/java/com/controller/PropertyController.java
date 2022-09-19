@@ -2,12 +2,12 @@ package com.controller;
 
 import com.entities.Property;
 import com.service.FilesStorageService;
+import com.service.MyIntrestService;
 import com.service.PropertyService;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +19,9 @@ import java.util.stream.Collectors;
 public class PropertyController {
 	@Autowired
     PropertyService propertyService;
+
+	@Autowired
+	MyIntrestService myIntrestService;
 
 	@Autowired
 	FilesStorageService storageService;
@@ -59,11 +62,19 @@ public class PropertyController {
 		return propertyService.searchbykeyword(p.getName(), p.getDescription());
 	}
 
+	@GetMapping("/cities")
+	public List<String> getCities() {
+		return propertyService.getCities();
+	}
 
 	@GetMapping("/search/{data}")
 	public List<Property> searchRaw(@PathVariable("data") String data) {
 		return propertyService.getAllProperties().stream().filter((e) -> {
-			return StringUtils.containsIgnoreCase(e.getName(),data);
+			return (StringUtils.containsIgnoreCase(e.getName(),data) ||
+					StringUtils.containsIgnoreCase(e.getCity(),data) ||
+					StringUtils.containsIgnoreCase(e.getArea(),data) ||
+					StringUtils.containsIgnoreCase(e.getAddress(),data)) &&
+					BooleanUtils.isTrue(e.isAvailable());
 		}).collect(Collectors.toList());
 	}
 
@@ -74,7 +85,7 @@ public class PropertyController {
 
 
 	@PostMapping
-	public Integer addProperty(@RequestBody com.models.Property property){
+	public Integer showIntrest(@RequestBody com.models.Property property){
 		try {
 			return propertyService.addProperty(property);
 		} catch (Exception e) {
@@ -82,4 +93,37 @@ public class PropertyController {
 		}
 	}
 
+
+	@PutMapping("/change_availability/{id}")
+	public void showIntrest(@PathVariable("id") Integer propertyId){
+		try {
+			propertyService.changeAvailability(propertyId);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@PostMapping("/show_interest")
+	public ResponseEntity showIntrest(@RequestParam("user_id") Integer userId, @RequestParam("property_id") Integer propertyId){
+		try {
+			myIntrestService.addMyIntrest(propertyId,userId);
+		}  catch (NoSuchMethodException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}catch (Exception e) {
+			return ResponseEntity.internalServerError().body(e.getMessage());
+		}
+		return ResponseEntity.ok().body("Done");
+	}
+
+	@PostMapping("/remove_interest")
+	public ResponseEntity removeIntrest(@RequestParam("user_id") Integer userId, @RequestParam("property_id") Integer propertyId){
+		try {
+			myIntrestService.removeIntrest(propertyId,userId);
+		}  catch (NoSuchMethodException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}catch (Exception e) {
+			return ResponseEntity.internalServerError().body(e.getMessage());
+		}
+		return ResponseEntity.ok().body("Done");
+	}
 }

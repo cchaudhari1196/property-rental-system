@@ -33,7 +33,6 @@ public class UserController
 	}
 	
 	@PostMapping("/loginuser")
-	//public ResponseEntity<User> loginUser(@RequestBody User user)
 	public ResponseEntity loginUser(@RequestBody User user) throws AuthenticationException {
 		User foundUser = userservice.loginUser(user);
 		if(foundUser!=null)

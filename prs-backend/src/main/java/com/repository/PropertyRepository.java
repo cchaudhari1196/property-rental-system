@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -32,5 +31,9 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 
 	@Query(value = "select p from Property p join p.intrestedUser u where u.id=?1")
 	public List<Property> getPropertiesByIntrestedUser(Integer user_id);
+
+
+	@Query(value = "select distinct p.city from Property p")
+	public List<String> getCityList();
 
 }

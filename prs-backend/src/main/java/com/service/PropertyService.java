@@ -44,8 +44,13 @@ public class PropertyService {
 	public List<Property> searchbykeyword(String pname, String pdesc) {
 		// TODO Auto-generated method stub
 		return propertyRepository.searchbykeyword(pname, pdesc);
-		
 	}
+
+	public List<String> getCities() {
+		// TODO Auto-generated method stub
+		return propertyRepository.getCityList();
+	}
+
 	public List<Property> getPropertysByCategory(String category) {
 		return propertyRepository.getByCategoryName(category);
 	}
@@ -78,10 +83,10 @@ public class PropertyService {
 			propertyEntity.setAddress(property.getAddress());
 			propertyEntity.setArea(property.getArea());
 			propertyEntity.setAvailable(true);
-			property.setDeposite(property.getDeposite());
+			propertyEntity.setDeposite(property.getDeposite());
 			propertyEntity.setCity(property.getCity());
 			propertyEntity.setTimestamp(Timestamp.from(Instant.now()));
-			property.setNoOfBalconies(property.getNoOfBalconies());
+			propertyEntity.setNoOfBalconies(property.getNoOfBalconies());
 			Set<Category> categories = property.getCategoryIds()
 							.stream().map(e-> categoryservice.getCategoryById(e)).collect(Collectors.toSet());
 			propertyEntity.setCategories(categories);
@@ -92,6 +97,23 @@ public class PropertyService {
 		catch (Exception ex){
 			ex.printStackTrace();
 			throw new Exception("Adding Property failed"+ ex.getMessage());
+		}
+	}
+
+	public void changeAvailability(Integer propertyId) throws Exception {
+		try{
+			Property property = propertyRepository.getById(propertyId);
+			if(property.isAvailable()){
+				property.setAvailable(false);
+			}
+			else {
+				property.setAvailable(true);
+			}
+			propertyRepository.save(property);
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+			throw new Exception("Unable to change the status of property"+ ex.getMessage());
 		}
 	}
 }

@@ -12,7 +12,7 @@ export default class ViewProperties extends React.Component {
     }
   }
   componentDidMount = () => {
-    fetch(process.env.REACT_APP_BASE_URL + '/property/all')
+    fetch(process.env.REACT_APP_BASE_URL + '/property')
       .then((resp) => resp.json())
       .then((data) => this.setState({ to: data }))
   }
@@ -45,45 +45,36 @@ export default class ViewProperties extends React.Component {
               <div className="vhome_row">
                 <Table striped bordered hover style={{ textAlign: 'center' }}>
                   <thead>
-                    <tr style={{ backgroundColor: '#6e1230', color: 'white' }}>
-                      <th>Product ID</th>
+                    <tr style={{ backgroundColor: '#6474E5', color: 'white' }}>
+                      <th>ID</th>
                       <th>Image</th>
                       <th>Owner Name</th>
-                      <th>Product Title</th>
-                      <th>Product Describe</th>
-                      <th>Product Price</th>
-                      <th>Product Rating</th>
-                      <th>Product Quantity(units)</th>
-                      <th>Categories</th>
-                      <th>Authors</th>
-                      <th>Publisher</th>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Rent</th>
+                      <th>Deposite</th>
+                      <th>Area</th>
+                      <th>City</th>
+                      <th>Availability</th>
                     </tr>
                   </thead>
                   <tbody>
                     {this.state.to.map((o) => {
                       return (
-                        <tr key={o.p_id}>
-                          <td>{o.p_id}</td>
+                        <tr key={o.id}>
+                          <td>{o.id}</td>
                           <td>
                             <img src={o.imageUrl} style={{ height: '110px' }} />
                           </td>
-                          <td>{o.vdr?.name}</td>
-                          <td>{o.pname}</td>
-                          <td>{o.pdesc.substring(0,100)}... <a style={{color:"blue", cursor:"pointer"}} onClick={(e)=>this.handleShowMoreLink(o.pdesc)}>Show More</a></td>
-                          <td>{o.pprice}</td>
-                          <td>{o.prating}</td>
-                          <td>{o.pqty}</td>
-                          <td>
-                            {o.categories.map((c) => {
-                              return <div key={c.c_id}>{c.c_name}</div>
-                            })}
-                          </td>
-                          <td>
-                            {o.authors.map((a) => {
-                              return <div key={a.id}>{a.name}</div>
-                            })}
-                          </td>
-                          <td>{o?.publisher?.p_name}</td>
+                          <td>{o.owner?.name}</td>
+                          <td>{o.name}</td>
+                          <td>{o.description.substring(0,100)}... <a style={{color:"blue", cursor:"pointer"}} onClick={(e)=>this.handleShowMoreLink(o.description)}>Show More</a></td>
+                          <td>₹{o.rent}</td>
+                          <td>₹{o.deposite}</td>
+                          <td>{o.area} sqft</td>
+                          <td>{o.city}</td>
+                          <td>{o.available ? "Available" : "Not Available"}</td>
+                          
                         </tr>
                       )
                     })}

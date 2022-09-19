@@ -178,7 +178,7 @@ class OwnerLogin extends React.Component {
                     }
                     <Link to="/owneregister" ><button className='innerbutton'> Create your Owner's Property Rental System Account</button></Link>
                     <Form.Group className="mb-2" controlId="formBasicEmail">
-                        <Link to="/" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
+                        <Link to="/login" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
                     </Form.Group>
                 </div>
             </div>

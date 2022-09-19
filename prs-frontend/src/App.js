@@ -1,12 +1,9 @@
 import './App.css';
 import Header from './components/Header';
 import Home from './components/Home';
-import Checkout from './components/Checkout';
 import Login from './components/Login.js';
 import Footer from './components/Footer.js';
 import Search from './components/Search.js';
-import RawProducts from './components/RawProducts.js';
-import StitchedProducts from './components/StitchedProducts.js';
 import Ownerlogin from './components/Ownerlogin.js';
 import OwnerHome from './components/OwnerHome.js';
 import Adminlogin from './components/AdminLogin.js';
@@ -34,9 +31,8 @@ function App() {
       <div className="App">
       <ToastContainer />
         <Routes>
-          <Route path="/home" element={<><Header /><Home /></>} />
-          <Route path="/checkout" element={<><Header /><Checkout /><Footer /></>} />
-          <Route path="/" element={<><Login /></>} />
+          <Route path="/" element={<><Header /><Home /></>} />
+          <Route path="/login" element={<><Login /></>} />
           <Route path="/register" element={<> <Register /></>} />
           <Route path="/owneregister" element={<> <OwnerRegister /></>} />
           <Route path="/ownerlogin" element={<><Ownerlogin /></>} />
@@ -59,12 +55,8 @@ function App() {
             <ViewOrderbyuid />
             <Footer /></>} />
           <Route path="/placed" element={<><MyOrderplaced /></>} />
-          <Route path="/raw" element={<><Header />
-            <RawProducts /></>} />
           <Route path="/property/:city" element={<><Header />
             <CityWiseProperties /></>} />
-          <Route path="/stitched" element={<><Header />
-            <StitchedProducts /></>} />
           <Route path="/about-us" element={<><Header />
             <AboutUs /></>} />
             

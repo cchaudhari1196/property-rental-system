@@ -17,7 +17,7 @@ export default class AddProperty extends React.Component {
       rent: '',
       deposite: '',
       address: '',
-      balconieserr: '',
+      balconies: '',
       city: '',
       area: '',
       cat: [],
@@ -203,7 +203,7 @@ export default class AddProperty extends React.Component {
     e.preventDefault()
     let sign = JSON.parse(localStorage.getItem('data1'))
     let data = {
-      "categoryIds": [this.state.allFurnishedTypes.value,...this.state.selectedPropertyType.map(v=>v.value),...this.state.selectedTenentType.map(v=>v.value),...this.state.selectedParkingType.map(v=>v.value),this.state.selectedPropertyStructureType.value],
+      "categoryIds": [this.state.selectedFurnishedType.value,...this.state.selectedPropertyType.map(v=>v.value),...this.state.selectedTenentType.map(v=>v.value),...this.state.selectedParkingType.map(v=>v.value),this.state.selectedPropertyStructureType.value],
       "rent": this.state.rent,
       "deposite": this.state.deposite,
       "imageUrl": this.state.p_image,
@@ -213,7 +213,7 @@ export default class AddProperty extends React.Component {
       "address": this.state.address,
       "city": this.state.city,
       "area": this.state.area,
-      "noOfBalconies": this.state.noOfBalconies,
+      "noOfBalconies": this.state.balconies,
       "isAvailable": true
     }
     await axios.post(process.env.REACT_APP_BASE_URL + '/property', data)
@@ -457,7 +457,7 @@ export default class AddProperty extends React.Component {
                 <Form.Group className="mb-2" controlId="formBasicEmail">
                   <Form.Label> City</Form.Label>
                   <Form.Control
-                    type="number"
+                    type="text"
                     placeholder="Enter city"
                     name="city"
                     value={this.state.city}

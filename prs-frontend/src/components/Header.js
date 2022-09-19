@@ -5,7 +5,6 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import PersonIcon from '@mui/icons-material/Person';
 import { Link, NavLink } from 'react-router-dom'
-import { useStateValue } from './Stateprovider'
 import {
   Navbar,
   Nav,
@@ -16,10 +15,10 @@ import {
   NavDropdown
 } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import Logo from '../assets/img/Logo.png';
 
 function Header() {
   const history = useNavigate()
-  const [{ basket }] = useStateValue()
   const [text, setText] = useState('')
   const [allCategories, setAllCategories] = useState([])
   let textInput = React.createRef()
@@ -41,7 +40,7 @@ function Header() {
     // localStorage.removeItem('text')
   }
   useEffect(() => {
-    fetch(process.env.REACT_APP_BASE_URL + "/category")
+    fetch(process.env.REACT_APP_BASE_URL + "/property/cities")
       .then(resp => resp.json())
       .then(data => {
         console.log(JSON.stringify(data));
@@ -49,12 +48,21 @@ function Header() {
       });
   }, [])
   return (
-   
+
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Link to="/" className="navbar_brand">
-          <Navbar.Brand> &nbsp;</Navbar.Brand>
+        <Link to="/" style={{textDecoration:"none"}}>
+          <Navbar.Brand style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              alt=""
+              src={Logo}
+              width="80"
+              height="60"
+              className="d-inline-block align-top"
+            />{' '}
+            <span style={{color:"#6474E5", marginLeft:"4px"}}>RentalWorld</span></Navbar.Brand>
         </Link>
+
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -62,7 +70,7 @@ function Header() {
             style={{
               maxHeight: '100px',
               alignItems: 'center',
-              color: '#6e1230',
+              color: '#6474E5',
             }}
             navbarScroll
           >
@@ -77,9 +85,11 @@ function Header() {
               Home
             </NavLink>
 
-            <NavDropdown title="Categories" id="basic-nav-dropdown" >
-              {allCategories.map(c => (
-                <NavDropdown.Item href={`/products/${c.c_id}`} key={c.c_id}>{c.c_name}</NavDropdown.Item>
+            <NavDropdown title="Cities" id="basic-nav-dropdown" >
+              {allCategories.map((c, index) => (
+                <NavDropdown.Item href={`/property/${c}`} key={index}>
+                  {c}
+                </NavDropdown.Item>
               ))}
             </NavDropdown>
 
@@ -106,7 +116,7 @@ function Header() {
             <button className="searchBtn">Search</button>
           </Form>
           <Nav.Link>
-            <Link to={!sign && '/'} className="headerLink">
+            <Link to={!sign && '/login'} className="headerLink">
               <div className="header_option">
                 <span className="header_optionLineOne">
                   Hello {!sign ? 'User' : sign.fname}
@@ -118,40 +128,18 @@ function Header() {
             </Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to={'/order'} className="headerLink">
-              <div className="header_option">
-                <span className="header_optionLineOne">Returns</span>
-                <span className="header_optionLineTwo">& Order</span>
-              </div>
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/profile">
-              <PersonIcon
-                fontSize="large"
-                style={{ color: '#6e1230' }}
-              />
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/checkout" className="headerLink">
-              <div className="header_optionBasket">
-                <ShoppingCartIcon
+            {JSON.parse(localStorage.getItem('data1')) !== null &&
+              < Link to="/profile">
+                <PersonIcon
                   fontSize="large"
-                  style={{ color: '#6e1230' }}
+                  style={{ color: '#6474E5' }}
                 />
-                <span
-                  className="header_optionLineTwo header_basketCount"
-                  style={{ color: '#6e1230' }}
-                >
-                  {basket?.length}
-                </span>
-              </div>
-            </Link>
+              </Link>
+            }
           </Nav.Link>
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+    </Navbar >
   )
 }
 

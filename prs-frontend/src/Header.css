@@ -1,7 +1,7 @@
 #basic-nav-dropdown{
     max-height: 100px;
     align-items: center;
-    color: rgb(110, 18, 48);
+    color: #6474E5;
 }
 .dropdown-menu {
     overflow-y: scroll;
@@ -71,19 +71,19 @@
     flex-direction:column;
     margin-left:15px;
     margin-right:15px;
-    color:#6e1230;
+    color:#6474E5;
 }
 .header_category{
     display:flex;
     flex-direction:column;
-    color:#6e1230;
+    color:#6474E5;
     font-size:18px;
     font-weight:800;
 
 }
 .navbar_brand {
     position: relative;
-    background: url(assets/img/Logo.png);
+    /* background: url(assets/img/Logo.png); */
     width: 170px;
     left: 15px;
     background-size: contain;
@@ -96,8 +96,8 @@
     white-space: nowrap;
   }
   .searchBtn{
-      border: 1px solid #6e1230;
-      color:#6e1230;
+      border: 1px solid #6474E5;
+      color:#6474E5;
       background-color: #FFFF;
       border-radius:4px
   }
@@ -105,13 +105,13 @@
      outline: none;
   }
   .headerLink{
-    color:#6e1230;
+    color:#6474E5;
     text-decoration: none;
     padding: 10px;
 
   }
   .headerLink:focus,.headerLink:hover{
-    color:#6e1230;
+    color:#6474E5;
     text-decoration: none;
   }
   .headerLinkActive{

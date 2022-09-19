@@ -143,7 +143,7 @@ class AdminLogin extends React.Component {
                         }
                         <button disabled={!this.state.isFormValid} className={this.state.isFormValid ? 'innerbutton' : "inactivebtn"} onClick={this.signIn}>Sign In</button><br />
                         <Form.Group className="mb-2" controlId="formBasicEmail">
-                            <Link to="/" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
+                            <Link to="/login" ><button className='innerbutton'><ArrowBackIcon />Back</button></Link><br />
                         </Form.Group>
                     </form>
                 </div>

@@ -49,7 +49,7 @@ export default class Viewowner extends React.Component {
                             <div className='mt-3'>
                                 <Table striped bordered hover style={{ textAlign: 'center' }}>
                                     <thead>
-                                        <tr style={{ backgroundColor: "#6e1230", color: "white" }}>
+                                        <tr style={{ backgroundColor: "#6474E5", color: "white" }}>
                                             <th>Owner ID</th>
                                             <th>Owner FirstName</th>
                                             <th>Owner ContactNumber</th>

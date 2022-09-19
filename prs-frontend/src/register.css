@@ -8,13 +8,13 @@
 }
 
 .register_container > button{
-    background: #6e1230;
+    background: #6474E5;
     border-radius: 2px;
     width:100%;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
     align-items: center;
     margin-top:10px;
-    border-color:#6e1230 #6e1230 #6e1230;
+    border-color:#6474E5 #6474E5 #6474E5;
     color:White;
     border-radius:8px;
 }
@@ -60,12 +60,12 @@ input[type="radio"]{
                 padding-bottom:10px;
 }
 .register_container> form > button{
-    background: #6e1230;
+    background: #6474E5;
     border-radius: 2px;
     width:100%;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
     margin-top:10px;
-    border-color:#6e1230 #6e1230 #6e1230;
+    border-color:#6474E5 #6474E5 #6474E5;
     color:White;
     border-radius:8px;
 }
@@ -90,12 +90,12 @@ input[type="radio"]{
      font-size:12px;
  }
  .innerbutton{
-    background: #6e1230;
+    background: #6474E5;
     border-radius: 2px;
-    width:40%;
+    /* width:40%; */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
     margin-top:10px;
-    border-color:#6e1230 #6e1230 #6e1230;
+    border-color:#6474E5 #6474E5 #6474E5;
     color:White;
     height:38px;
     border-radius:8px;

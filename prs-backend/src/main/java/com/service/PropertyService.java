@@ -37,6 +37,14 @@ public class PropertyService {
 		return property;
 	}
 
+	public void deleteProject(int pId) throws Exception {
+		Property property = propertyRepository.getById(pId);
+		if(property == null){
+			throw new Exception("property doesnt exists");
+		}
+		propertyRepository.delete(property);
+	}
+
 	public Property save(Property p) {
 		return propertyRepository.save(p);
 	}

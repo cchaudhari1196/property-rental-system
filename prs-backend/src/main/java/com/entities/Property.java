@@ -34,11 +34,11 @@ public class Property {
 	private boolean isAvailable;
 	private Timestamp timestamp;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
 	@JoinTable(
 			name="properties_categories",
 			joinColumns = {
@@ -52,7 +52,7 @@ public class Property {
 	private Set<Category> categories = new HashSet<>();
 
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
 	@JoinTable(
 			name="properties_intrested_user",
 			joinColumns = {

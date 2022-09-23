@@ -35,6 +35,12 @@ public class PropertyController {
 		return ResponseEntity.ok(property);
 	}
 
+
+	@DeleteMapping("/{id}")
+	public void deleteById(@PathVariable("id") int id) throws Exception {
+		propertyService.deleteProject(id);
+	}
+
 	/*Here if we dont pass any value all data will be returned*/
 	@GetMapping()
 	public List<Property> getByCatrgory(@RequestParam(name="category", required = false) String category,
